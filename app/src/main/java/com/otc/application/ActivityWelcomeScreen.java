@@ -22,13 +22,12 @@ public class ActivityWelcomeScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-
-                goToMainAcitivty();
+                moveToMainAcitivty();
             }
         },SPLASH_TIMED_OUT);
     }
 
-    private void goToMainAcitivty(){
+    private void moveToMainAcitivty(){
         Intent toActivityMain = new Intent(ActivityWelcomeScreen.this, ActivityHome.class);
         toActivityMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(toActivityMain);
