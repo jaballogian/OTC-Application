@@ -4,14 +4,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/application_logo"
         android:label="@string/OTC"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/application_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".ActivityHome"></activity>
-        <activity android:name=".ActivitySignIn" />
         <activity android:name=".ActivitySignUp" />
+        <activity android:name=".ActivitySignIn" />
         <activity android:name=".ActivityWelcomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

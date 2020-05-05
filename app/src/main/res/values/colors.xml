@@ -7,5 +7,7 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="light_orange">#FFD662</color>
-    <color name="grey">#000000</color>
+    <color name="grey">#2D2D2D99</color>
+    <color name="light_grey">#A9B0BB</color>
+    <color name="shadow">#00000033</color>
 </resources>

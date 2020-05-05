@@ -3,4 +3,19 @@
     <string name="siap_untuk_menjadi_medalist">Siap untuk menjadi medalist?</string>
     <string name="masuk">Masuk</string>
     <string name="belum_punya_akun_ayo_daftar">Belum punya akun? Ayo daftar</string>
+    <string name="alamat_email">Alamat Email</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="lupa_kata_sandi">Lupa kata sandi?</string>
+    <string name="trademark_otc">Copyright 2020 OSN Training Center (OSN)</string>
+    <string name="daftar">Daftar</string>
+    <string name="sudah_punya_akun_masuk_aja">Sudah punya akun? Masuk, aja!</string>
+    <string name="jenis_akun">Jenis Akun</string>
+    <string name="jenjang_sekolah">Jenjang Sekolah</string>
+    <string name="tipe_sekolah">Tipe Sekolah</string>
+    <string name="nama_lengkap_beserta_gelar">Nama Lengkap (beserta gelar)</string>
+    <string name="email">Email</string>
+    <string name="nomor_wa_handphone">Nomor WA (Handphone)</string>
+    <string name="id_line_optional">ID Line (Optional)</string>
+    <string name="instagram">Instagram</string>
+    <string name="persetujuan_pendafataran">Dengan mendaftarkan diri, saya telah membaca dan menyetujui Syarat dan Ketentuan oleh Tim OTC</string>
 </resources>

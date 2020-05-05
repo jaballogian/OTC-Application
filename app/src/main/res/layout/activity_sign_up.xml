@@ -9,10 +9,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="30dp">
 
         <ImageView
-            android:id="@+id/logoSiapUntukMenjadiMedalist"
+            android:id="@+id/imageViewSiapUntukMenjadiMedalist"
             android:layout_width="200dp"
             android:layout_height="100dp"
             app:srcCompat="@drawable/ready_to_be_a_medalist_logo"
@@ -23,7 +24,7 @@
             app:layout_constraintLeft_toLeftOf="parent"/>
 
         <TextView
-            android:id="@+id/tulisanSiapUntukMenjadiMedalist"
+            android:id="@+id/textViewSiapUntukMenjadiMedalist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/siap_untuk_menjadi_medalist"
@@ -32,23 +33,25 @@
             android:textStyle="bold"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logoSiapUntukMenjadiMedalist"/>
+            app:layout_constraintTop_toBottomOf="@+id/imageViewSiapUntukMenjadiMedalist"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_white_rounded_shadow"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tulisanSiapUntukMenjadiMedalist"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSiapUntukMenjadiMedalist"
             android:layout_margin="20dp"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:layout_marginBottom="30dp">
 
             <TextView
-                android:id="@+id/signInText"
+                android:id="@+id/textViewDaftar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/masuk"
+                android:text="@string/daftar"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -56,16 +59,202 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tulisanBelumPunyaAkun"
+                android:id="@+id/textViewSudahPunyaAkunMasukAja"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/belum_punya_akun_ayo_daftar"
+                android:text="@string/sudah_punya_akun_masuk_aja"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/signInText"/>
+                app:layout_constraintTop_toBottomOf="@+id/textViewDaftar"/>
+
+            <Spinner
+                android:id="@+id/spinnerJenisAkun"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSudahPunyaAkunMasukAja"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_marginTop="40dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerJenjangSekolah"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerJenisAkun"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_marginTop="20dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerTipeSekolah"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerJenjangSekolah"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_marginTop="20dp"/>
+
+<!--            TODO: add sekolah field here-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutNamaLengkap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerTipeSekolah"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                app:hintTextAppearance="@style/HintInputTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextNamaLengkap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:hint="@string/nama_lengkap_beserta_gelar"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNamaLengkap"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                app:hintTextAppearance="@style/HintInputTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:hint="@string/email"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutKataSandi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/ic_remove_red_eye_black_24dp"
+                app:hintTextAppearance="@style/HintInputTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextKataSandi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:hint="@string/kata_sandi"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutNomorWAHandphone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutKataSandi"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                app:hintTextAppearance="@style/HintInputTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextNomorWAHandphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:hint="@string/nomor_wa_handphone"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutIDLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomorWAHandphone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                app:hintTextAppearance="@style/HintInputTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextIDLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:hint="@string/id_line_optional"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutInstagram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutIDLine"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                app:hintTextAppearance="@style/HintInputTextStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextInstagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:hint="@string/instagram"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinnerBidang"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutInstagram"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_marginTop="20dp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxPersetujuanPendaftaran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/persetujuan_pendafataran"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerBidang"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/masuk"
+                android:textAllCaps="false"
+                android:background="@drawable/rectangle_orange_rounded"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/checkBoxPersetujuanPendaftaran"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="30dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textViewTrademarkOTC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trademark_otc"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutBox"
+            android:layout_marginTop="30dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
