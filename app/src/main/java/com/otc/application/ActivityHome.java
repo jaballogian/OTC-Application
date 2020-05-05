@@ -25,7 +25,7 @@ public class ActivityHome extends AppCompatActivity {
     }
 
     private void moveToActivitySignIn(){
-        Intent toActivitySignIn = new Intent(ActivityHome.this, ActivitySignUp.class);
+        Intent toActivitySignIn = new Intent(ActivityHome.this, ActivitySignIn.class);
         toActivitySignIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(toActivitySignIn);
         finish();

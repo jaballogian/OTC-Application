@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/application_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ActivityHome"></activity>
+        <activity android:name=".ActivityTermsAndCondition"></activity>
+        <activity android:name=".ActivityHome" />
         <activity android:name=".ActivitySignUp" />
         <activity android:name=".ActivitySignIn" />
         <activity android:name=".ActivityWelcomeScreen">

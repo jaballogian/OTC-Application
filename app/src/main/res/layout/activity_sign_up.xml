@@ -220,13 +220,24 @@
                 android:id="@+id/checkBoxPersetujuanPendaftaran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/persetujuan_pendafataran"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerBidang"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewPersetujuan"
                 android:layout_marginTop="20dp"
-                android:paddingLeft="10dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/textViewPersetujuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/persetujuan_pendafataran"
                 android:textColor="@color/black"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/checkBoxPersetujuanPendaftaran"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerBidang"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="40dp" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -238,8 +249,10 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/checkBoxPersetujuanPendaftaran"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -18,4 +18,30 @@
     <string name="id_line_optional">ID Line (Optional)</string>
     <string name="instagram">Instagram</string>
     <string name="persetujuan_pendafataran">Dengan mendaftarkan diri, saya telah membaca dan menyetujui Syarat dan Ketentuan oleh Tim OTC</string>
+    <string name="syarat_dan_ketentuan">Syarat dan Ketentuan</string>
+    <string name="pengguna_platform">Pengguna Platform</string>
+    <string name="berlaku_efektif_sejak">Berlaku efektif sejak 1 Mei 2020</string>
+    
+    <string name="syarat_dan_ketentuan_pengguna_platform">Syarat dan Ketentuan ini merupakan perjanjian antara pengguna (“Anda”) dan OSN-Training Center (“Kami”), yaitu sebuah perusahaan yang didirikan dan beroperasi secara sah berdasarkan hukum Negara Republik Indonesia. Syarat dan Ketentuan ini mengatur Anda saat mengakses dan menggunakan aplikasi, situs web (www.elearningolimpiade.com dan situs web lain yang Kami kelola), fitur, teknologi, konten dan produk yang Kami sediakan (selanjutnya, secara Bersama-sama disebut sebagai “Platform”),
+        \n\nHarap membaca Syarat dan Ketentuan ini secara seksama sebelum Anda mulai menggunakan Platform Kami, karena peraturan ini berlaku pada penggunaan Anda terhadap Platform Kami Syarat dan Ketentuan ini mencakup hal-hal sebagai berikut:
+        \n\tA. Pembukaan Akun Anda
+        \n\tB. Informasi Pribadi Anda
+        \n\tC. Akses Terhadap Platfrom Kami
+        \n\tD. Penggunaan yang Dilarang
+        \n\tE. Hak Kekayaan Intelektual
+        \n\tF. Keadaan Kahar (Force Majeure)
+        \n\tG. Hukum yang Berlaku
+        \n\tH. Informasi Pribadi yang dapat Kami Kumpulkan
+        \n\tI. Penggunaan Informasi Pribadi
+        \n\tJ. Pengungkapan Informasi Pribadi
+        \n\tK. Penyimpanan Informasi Pribadi
+        \n\tL. Ketentuan Lainnya
+        \n\nAnda harus berusia minimal 18 (delapan belas) tahun atau sudah menikah dan tidak berada di bawah perwalian atau pengampuan agar Anda secara hukum memiliki kapasitas dan berhak untuk mengikatkan diri pada Syarat dan Ketentuan ini. Jika Anda tidak memenuhi ketentuan tersebut, maka tindakan Anda mendaftar, mengakses, menggunakan atau melakukan aktivitas lain dalam Platform Kami harus dalam sepengetahuan, pengawasan dan persetujuan yang sah dari orang tua atau wali atau pengampu Anda. Orang tua, wali atau pengampu yang memberikan persetujuan bagi Anda yang berusia di bawah 18 (delapan belas) tahun bertanggung jawab secara penuh atas seluruh tindakan Anda dalam penggunaan dan akses terhadap Platform.
+        \n\nDengan mendaftar dan/atau menggunakan Platform Kami, maka Anda dan/atau orang tua, wali atau pengampu Anda (jika Anda berusia di bawah 18 tahun) dianggap telah membaca, mengerti, memahami dan menyetujui semua isi dalam Syarat dan Ketentuan ini.
+        \n\nDengan menyetujui Syarat dan Ketentuan ini, Anda juga menyetujui Syarat dan Ketentuan tambahan, termasuk Syarat dan Ketentuan atas setiap Layanan, dan perubahannya yang merupakan bagian yang tidak terpisahkan dari Syarat dan Ketentuan ini (selanjutnya, Syarat dan Ketentuan, Syarat dan Ketentuan tambahan, dan perubahannya secara bersama-sama disebut sebagai “Syarat dan Ketentuan”). Meskipun merupakan satu kesatuan, Syarat dan Ketentuan tambahan akan berlaku dalam hal terdapat perbedaan dengan Syarat dan Ketentuan.
+        \n\nJika Anda tidak menyetujui Syarat dan Ketentuan ini, Kami berhak untuk menghentikan akses dan penggunaan Anda terhadap Platform Kami.
+        \n\n\<b>A. PEMBUKAAN AKUN ANDA</b>
+        \n\nSebelum menggunakan Platform, Anda menyetujui Syarat dan Ketentuan ini, dan mendaftarkan diri Anda dengan memberikan informasi yang Kami butuhkan. Saat melakukan pendaftaran, Kami akan meminta Anda untuk memberikan nama lengkap, alamat surat elektronik dan nomor telepon genggam pribadi Anda. Kami juga dapat menghentikan penggunaan Platform jika dikemudian hari data-data yang Anda berikan kepada Kami terbukti tidak benar.
+        \n\nSistem Kami akan membuatkan akun pada Platform (“Akun”) untuk Anda yang dapat digunakan untuk menggunakan Platform dan memesan layanan melalui Platform.
+        \n\nDalam hal Anda telah keluar dari Akun Anda, maka Anda perlu memasukan alamat surat elektronik yang ada berikan pada saat mendaftarkan diri Anda dan memasukan password.</string>
 </resources>
