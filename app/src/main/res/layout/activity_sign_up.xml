@@ -88,7 +88,7 @@
                 android:layout_marginTop="20dp"
                 android:prompt="@string/jenjang_sekolah"/>
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerTipeSekolah"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -189,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:textColor="@color/black"
-                    android:hint="@string/id_line_optional"/>
+                    android:hint="@string/id_line_opsional"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -207,10 +207,10 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:textColor="@color/black"
-                    android:hint="@string/instagram"/>
+                    android:hint="@string/instagram_opsional"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerBidang"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

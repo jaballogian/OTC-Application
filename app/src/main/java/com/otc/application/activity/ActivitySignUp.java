@@ -13,10 +13,12 @@ import android.widget.ArrayAdapter;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,15 +28,19 @@ import com.otc.application.CommonMethods;
 import com.otc.application.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ActivitySignUp extends AppCompatActivity {
 
     private TextView textViewSudahPunyaAkunMasukAja, textViewPersetujuan;
     private CommonMethods commonMethods;
     private DatabaseReference halamanPendaftaranReference, jenisAkunReference, jenjangSekolahReference;
-    private AppCompatSpinner spinnerJenisAkun, spinnerJenjangSekolah;
-    private ArrayList<String> userData;
+    private AppCompatSpinner spinnerJenisAkun, spinnerJenjangSekolah, spinnerTipeSekolah, spinnerBidang;
     private Button buttonMasuk;
+    private TextInputEditText textInputEditTextNamaLengkap, textInputEditTextEmail, textInputEditTextKataSandi, textInputEditTextNomorWAHandphone, textInputEditTextIDLine, textInputEditTextInstagram;
+    private HashMap<String, String> userData, userDataFromEditText, userDataFromSpinner;
+    private HashMap<String, EditText> userDataHashMapEditText;
+    private ArrayList<Spinner> arrayListSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,23 +67,50 @@ public class ActivitySignUp extends AppCompatActivity {
             }
         });
 
-        userData = new ArrayList<String>();
-        userData.add("");
-        userData.add("");
+        userData = new HashMap<>();
 
         spinnerJenisAkun = (AppCompatSpinner) findViewById(R.id.spinnerJenisAkun);
         commonMethods.readArrayListFromDatabase(jenisAkunReference, spinnerJenisAkun);
-        handleSpinnderOnItemClicked(spinnerJenisAkun);
 
         spinnerJenjangSekolah = (AppCompatSpinner) findViewById(R.id.spinnerJenjangSekolah);
         commonMethods.readArrayListFromDatabase(jenjangSekolahReference, spinnerJenjangSekolah);
-        handleSpinnderOnItemClicked(spinnerJenjangSekolah);
+
+        arrayListSpinner = new ArrayList<Spinner>();
+        arrayListSpinner.add(spinnerJenisAkun);
+        arrayListSpinner.add(spinnerJenjangSekolah);
+
+        userDataFromSpinner = commonMethods.handleSpinnderOnItemClicked(arrayListSpinner);
+
+        spinnerTipeSekolah = (AppCompatSpinner) findViewById(R.id.spinnerTipeSekolah);
+        //TODO: read define and read "tipe sekolah" from database here
+
+        textInputEditTextNamaLengkap = (TextInputEditText) findViewById(R.id.textInputEditTextNamaLengkap);
+        textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
+        textInputEditTextKataSandi = (TextInputEditText) findViewById(R.id.textInputEditTextKataSandi);
+        textInputEditTextNomorWAHandphone = (TextInputEditText) findViewById(R.id.textInputEditTextNomorWAHandphone);
+        textInputEditTextIDLine = (TextInputEditText) findViewById(R.id.textInputEditTextIDLine);
+        textInputEditTextInstagram = (TextInputEditText) findViewById(R.id.textInputEditTextInstagram);
+
+        userDataHashMapEditText = new HashMap<>();
+        userDataHashMapEditText.put(getString(R.string.nama_lengkap_beserta_gelar), textInputEditTextNamaLengkap);
+        userDataHashMapEditText.put(getString(R.string.email), textInputEditTextEmail);
+        userDataHashMapEditText.put(getString(R.string.kata_sandi), textInputEditTextKataSandi);
+        userDataHashMapEditText.put(getString(R.string.nomor_wa_handphone), textInputEditTextNomorWAHandphone);
+        userDataHashMapEditText.put(getString(R.string.instagram_opsional), textInputEditTextInstagram);
+        userDataHashMapEditText.put(getString(R.string.id_line_opsional), textInputEditTextIDLine);
+
+        userDataFromEditText = new HashMap<>();
+
+        spinnerBidang = (AppCompatSpinner) findViewById(R.id.spinnerBidang);
 
         buttonMasuk = (Button) findViewById(R.id.buttonMasuk);
         buttonMasuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ActivitySignUp.this, userData.toString(), Toast.LENGTH_LONG).show();
+                userDataFromEditText = commonMethods.getAllEditTextValueAndConvertItToHashMap(userDataHashMapEditText);
+                userData.putAll(userDataFromEditText);
+                userData.putAll(userDataFromSpinner);
+                Log.d("userData", userData.toString());
             }
         });
     }
@@ -87,27 +120,29 @@ public class ActivitySignUp extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void handleSpinnderOnItemClicked (final Spinner inputSpinner){
-
-        inputSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                int i = 0;
-                if(inputSpinner == spinnerJenisAkun){
-                    i = 0;
-                }
-                else if(inputSpinner == spinnerJenjangSekolah){
-                    i = 1;
-                }
-                userData.set(i, parent.getItemAtPosition(position).toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                // TODO Auto-generated method stub
-            }
-        });
-    }
+//    private void handleSpinnderOnItemClicked (final Spinner inputSpinner){
+//
+//        inputSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                String key = "";
+//                String value = parent.getItemAtPosition(position).toString();
+//                if(inputSpinner == spinnerJenisAkun){
+//                    key = getString(R.string.jenis_akun);
+//                }
+//                else if(inputSpinner == spinnerJenjangSekolah){
+//                    key = getString(R.string.jenjang_sekolah);
+//                }
+//                Log.d("keyInputSpinner", key + " " + value);
+//                userData.put(key, value);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//                // TODO Auto-generated method stub
+//            }
+//        });
+//    }
 }

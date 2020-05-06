@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CommonMethods {
 
@@ -75,5 +78,40 @@ public class CommonMethods {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         inputSpinner.setAdapter(arrayAdapter);
         inputSpinner.setSelection(0, true);
+    }
+
+    public HashMap<String, String> getAllEditTextValueAndConvertItToHashMap(HashMap<String, EditText> inputHashMap){
+
+        HashMap<String, String> outputHashMap = new HashMap<>();
+        for (Map.Entry<String, EditText> entry : inputHashMap.entrySet()){
+            outputHashMap.put(entry.getKey(), entry.getValue().getText().toString());
+        }
+        return outputHashMap;
+    }
+
+    public HashMap<String, String> handleSpinnderOnItemClicked (final ArrayList<Spinner> inputArrayListSpinner){
+
+        final HashMap<String, String> outputHashMap = new HashMap<>();
+        for(final Spinner element: inputArrayListSpinner){
+
+            element.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    String key = element.getAdapter().getItem(0).toString();
+                    String value = parent.getItemAtPosition(position).toString();
+                    Log.d("keyInputSpinner", key + " " + value);
+                    outputHashMap.put(key, value);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                    // TODO Auto-generated method stub
+                }
+            });
+        }
+
+        return outputHashMap;
     }
 }

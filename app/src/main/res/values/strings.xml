@@ -15,8 +15,8 @@
     <string name="nama_lengkap_beserta_gelar">Nama Lengkap (beserta gelar)</string>
     <string name="email">Email</string>
     <string name="nomor_wa_handphone">Nomor WA (Handphone)</string>
-    <string name="id_line_optional">ID Line (Optional)</string>
-    <string name="instagram">Instagram</string>
+    <string name="id_line_opsional">ID Line (Opsional)</string>
+    <string name="instagram_opsional">Instagram (Opsional)</string>
     <string name="persetujuan_pendafataran">Dengan mendaftarkan diri, saya telah membaca dan menyetujui Syarat dan Ketentuan oleh Tim OTC</string>
     <string name="syarat_dan_ketentuan">Syarat dan Ketentuan</string>
     <string name="pengguna_platform">Pengguna Platform</string>
