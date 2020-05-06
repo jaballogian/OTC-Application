@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ThrowOnExtraProperties;
 import com.google.firebase.database.ValueEventListener;
 import com.otc.application.CommonMethods;
 import com.otc.application.R;
@@ -41,6 +43,7 @@ public class ActivitySignUp extends AppCompatActivity {
     private HashMap<String, String> userData, userDataFromEditText, userDataFromSpinner;
     private HashMap<String, EditText> userDataHashMapEditText;
     private ArrayList<Spinner> arrayListSpinner;
+    private CheckBox checkBoxPersetujuanPendaftaran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,7 @@ public class ActivitySignUp extends AppCompatActivity {
         userDataFromSpinner = commonMethods.handleSpinnderOnItemClicked(arrayListSpinner);
 
         spinnerTipeSekolah = (AppCompatSpinner) findViewById(R.id.spinnerTipeSekolah);
-        //TODO: read define and read "tipe sekolah" from database here
+        //TODO: define and read "tipe sekolah" from database
 
         textInputEditTextNamaLengkap = (TextInputEditText) findViewById(R.id.textInputEditTextNamaLengkap);
         textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
@@ -102,15 +105,16 @@ public class ActivitySignUp extends AppCompatActivity {
         userDataFromEditText = new HashMap<>();
 
         spinnerBidang = (AppCompatSpinner) findViewById(R.id.spinnerBidang);
+        //TODO: define and read "bidang" from database
+
+        checkBoxPersetujuanPendaftaran = (CheckBox) findViewById(R.id.checkBoxPersetujuanPendaftaran);
 
         buttonMasuk = (Button) findViewById(R.id.buttonMasuk);
         buttonMasuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userDataFromEditText = commonMethods.getAllEditTextValueAndConvertItToHashMap(userDataHashMapEditText);
-                userData.putAll(userDataFromEditText);
-                userData.putAll(userDataFromSpinner);
-                Log.d("userData", userData.toString());
+
+                handleWhenButtonMasukIsClicked();
             }
         });
     }
@@ -120,29 +124,32 @@ public class ActivitySignUp extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private void handleSpinnderOnItemClicked (final Spinner inputSpinner){
-//
-//        inputSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//                String key = "";
-//                String value = parent.getItemAtPosition(position).toString();
-//                if(inputSpinner == spinnerJenisAkun){
-//                    key = getString(R.string.jenis_akun);
-//                }
-//                else if(inputSpinner == spinnerJenjangSekolah){
-//                    key = getString(R.string.jenjang_sekolah);
-//                }
-//                Log.d("keyInputSpinner", key + " " + value);
-//                userData.put(key, value);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//                // TODO Auto-generated method stub
-//            }
-//        });
-//    }
+    private void handleWhenButtonMasukIsClicked(){
+
+        if(checkBoxPersetujuanPendaftaran.isChecked()){
+            userDataFromEditText = commonMethods.getAllEditTextValueAndConvertItToHashMap(userDataHashMapEditText);
+
+            if(userDataFromEditText.get(getString(R.string.nama_lengkap_beserta_gelar)).isEmpty()
+                    || userDataFromEditText.get(getString(R.string.email)).isEmpty()
+                    || userDataFromEditText.get(getString(R.string.kata_sandi)).isEmpty()
+                    || userDataFromEditText.get(getString(R.string.nomor_wa_handphone)).isEmpty()){
+                Toast.makeText(ActivitySignUp.this, getString(R.string.semua_kolom_yang_bukan_opsional_wajib_diisi), Toast.LENGTH_LONG).show();
+            }
+            else {
+
+                if(userDataFromSpinner.get(getString(R.string.jenis_akun)).equals(getString(R.string.jenis_akun))
+                        || userDataFromSpinner.get(getString(R.string.jenjang_sekolah)).equals(getString(R.string.jenjang_sekolah))){
+                    Toast.makeText(ActivitySignUp.this, getString(R.string.pilih_jenis_akun_dan_jenjang_akun_yang_valid), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    userData.putAll(userDataFromEditText);
+                    userData.putAll(userDataFromSpinner);
+                    Log.d("userData", userData.toString());
+                }
+            }
+        }
+        else {
+            Toast.makeText(ActivitySignUp.this, getString(R.string.anda_belum_menyetujui_syarat_dan_ketentuan_yang_berlaku), Toast.LENGTH_LONG).show();
+        }
+    }
 }
