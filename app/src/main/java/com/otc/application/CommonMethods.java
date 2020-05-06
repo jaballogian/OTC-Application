@@ -44,7 +44,7 @@ public class CommonMethods {
         inputTextView.setText(spannableStringBuilder);
     }
 
-    public ArrayList<String> readArrayListFromDatabase(DatabaseReference inputDatabaseReference){
+    public void readArrayListFromDatabase(DatabaseReference inputDatabaseReference, final Spinner inputSpinner){
 
         final ArrayList<String> arrayList = new ArrayList<String>();
         inputDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -58,6 +58,8 @@ public class CommonMethods {
                     value = ds.getKey();
                     arrayList.add(value);
                 }
+
+                populateArrayListToSpinner(context, inputSpinner, arrayList);
             }
 
             @Override
@@ -65,8 +67,6 @@ public class CommonMethods {
 
             }
         });
-
-        return arrayList;
     }
 
     public void populateArrayListToSpinner(Context context, Spinner inputSpinner, ArrayList<String> inputArrayList){

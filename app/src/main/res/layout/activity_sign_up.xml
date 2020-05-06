@@ -68,7 +68,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDaftar"/>
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerJenisAkun"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -78,7 +78,7 @@
                 android:layout_marginTop="40dp"
                 android:prompt="@string/jenis_akun"/>
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerJenjangSekolah"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -243,6 +243,7 @@
                 android:layout_marginLeft="40dp" />
 
             <Button
+                android:id="@+id/buttonMasuk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/masuk"

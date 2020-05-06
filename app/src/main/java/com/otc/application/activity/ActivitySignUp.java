@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import androidx.appcompat.widget.AppCompatSpinner;
+
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +32,9 @@ public class ActivitySignUp extends AppCompatActivity {
     private TextView textViewSudahPunyaAkunMasukAja, textViewPersetujuan;
     private CommonMethods commonMethods;
     private DatabaseReference halamanPendaftaranReference, jenisAkunReference, jenjangSekolahReference;
-    private Spinner spinnerJenisAkun, spinnerJenjangSekolah;
+    private AppCompatSpinner spinnerJenisAkun, spinnerJenjangSekolah;
+    private ArrayList<String> userData;
+    private Button buttonMasuk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +61,46 @@ public class ActivitySignUp extends AppCompatActivity {
             }
         });
 
-        spinnerJenisAkun = (Spinner) findViewById(R.id.spinnerJenisAkun);
-        commonMethods.populateArrayListToSpinner(this, spinnerJenisAkun, commonMethods.readArrayListFromDatabase(jenisAkunReference));
+        userData = new ArrayList<String>();
+        userData.add("");
+        userData.add("");
 
-        spinnerJenjangSekolah = (Spinner) findViewById(R.id.spinnerJenjangSekolah);
-        commonMethods.populateArrayListToSpinner(this, spinnerJenjangSekolah, commonMethods.readArrayListFromDatabase(jenjangSekolahReference));
+        spinnerJenisAkun = (AppCompatSpinner) findViewById(R.id.spinnerJenisAkun);
+        commonMethods.readArrayListFromDatabase(jenisAkunReference, spinnerJenisAkun);
+        handleSpinnderOnItemClicked(spinnerJenisAkun);
 
-        spinnerJenisAkun.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerJenjangSekolah = (AppCompatSpinner) findViewById(R.id.spinnerJenjangSekolah);
+        commonMethods.readArrayListFromDatabase(jenjangSekolahReference, spinnerJenjangSekolah);
+        handleSpinnderOnItemClicked(spinnerJenjangSekolah);
+
+        buttonMasuk = (Button) findViewById(R.id.buttonMasuk);
+        buttonMasuk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ActivitySignUp.this, userData.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void moveToActivityTermsAndCondition(){
+        Intent intent = new Intent(ActivitySignUp.this, ActivityTermsAndCondition.class);
+        startActivity(intent);
+    }
+
+    private void handleSpinnderOnItemClicked (final Spinner inputSpinner){
+
+        inputSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                String selectedOption = parent.getItemAtPosition(position).toString();
-                spinnerJenisAkun.setSelection(position);
-                Toast.makeText(ActivitySignUp.this, selectedOption, Toast.LENGTH_LONG).show();
+                int i = 0;
+                if(inputSpinner == spinnerJenisAkun){
+                    i = 0;
+                }
+                else if(inputSpinner == spinnerJenjangSekolah){
+                    i = 1;
+                }
+                userData.set(i, parent.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -77,10 +109,5 @@ public class ActivitySignUp extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-    }
-
-    private void moveToActivityTermsAndCondition(){
-        Intent intent = new Intent(ActivitySignUp.this, ActivityTermsAndCondition.class);
-        startActivity(intent);
     }
 }
