@@ -1,4 +1,4 @@
-package com.otc.application;
+package com.otc.application.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.otc.application.R;
 
 public class ActivityWelcomeScreen extends AppCompatActivity {
 

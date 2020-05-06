@@ -1,15 +1,14 @@
-package com.otc.application;
+package com.otc.application.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
+
+import com.otc.application.CommonMethods;
+import com.otc.application.R;
 
 public class ActivitySignIn extends AppCompatActivity {
 
@@ -25,7 +24,7 @@ public class ActivitySignIn extends AppCompatActivity {
 
         textViewBelumPunyaAkun = (TextView) findViewById(R.id.textViewBelumPunyaAkun);
         commonMethods.splitTextViewIntoTwoColors(textViewBelumPunyaAkun, getString(R.string.belum_punya_akun_ayo_daftar),
-                getResources().getColor(R.color.black), getResources().getColor(R.color.light_orange), 0, 17, 18, 29);
+                getResources().getColor(R.color.black), getResources().getColor(R.color.light_orange), 0, 17, 18, 30);
 
         textViewBelumPunyaAkun.setOnClickListener(new View.OnClickListener() {
             @Override
