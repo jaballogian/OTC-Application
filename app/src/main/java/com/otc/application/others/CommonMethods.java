@@ -1,4 +1,4 @@
-package com.otc.application;
+package com.otc.application.others;
 
 import android.content.Context;
 import android.content.res.Resources;

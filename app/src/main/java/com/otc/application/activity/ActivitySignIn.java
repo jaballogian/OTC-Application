@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.otc.application.CommonMethods;
+import com.otc.application.others.CommonMethods;
 import com.otc.application.R;
 
 public class ActivitySignIn extends AppCompatActivity {
