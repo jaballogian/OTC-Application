@@ -248,7 +248,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/masuk"
                 android:textAllCaps="false"
-                android:background="@drawable/rectangle_orange_rounded"
+                android:background="@drawable/rectangle_orange_rounded_5dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
