@@ -175,7 +175,7 @@ public class ActivitySignUp extends AppCompatActivity {
                     userData.put(getString(R.string.kata_sandi), EncryptionAndDecryption.encrypt(userData.get(getString(R.string.kata_sandi))));
                     Log.d("userData", userData.toString());
 
-                    setProgressDialog();
+                    commonMethods.setProgressDialog(this, loading);
                     registerUser(userData);
                 }
             }
@@ -199,8 +199,8 @@ public class ActivitySignUp extends AppCompatActivity {
     }
 
     private void registerUser(final HashMap<String, String> inputHashMap){
-        mAuth.createUserWithEmailAndPassword(inputHashMap.get(getString(R.string.email)), inputHashMap.get(getString(R.string.kata_sandi))).
-                addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(inputHashMap.get(getString(R.string.email)), EncryptionAndDecryption.encrypt(inputHashMap.get(getString(R.string.kata_sandi))))
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
@@ -230,13 +230,5 @@ public class ActivitySignUp extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void setProgressDialog(){
-
-        loading.setTitle(R.string.sedang_memproses);
-        loading.setMessage(getString(R.string.mohon_tunggu));
-        loading.setCanceledOnTouchOutside(false);
-        loading.show();
     }
 }

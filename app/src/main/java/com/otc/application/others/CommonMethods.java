@@ -1,5 +1,6 @@
 package com.otc.application.others;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.text.SpannableString;
@@ -158,5 +159,13 @@ public class CommonMethods {
         }
 
         return outputHashMap;
+    }
+
+    public void setProgressDialog(Context context, ProgressDialog inputProgressDialog){
+
+        inputProgressDialog.setTitle(R.string.sedang_memproses);
+        inputProgressDialog.setMessage(context.getString(R.string.mohon_tunggu));
+        inputProgressDialog.setCanceledOnTouchOutside(false);
+        inputProgressDialog.show();
     }
 }
