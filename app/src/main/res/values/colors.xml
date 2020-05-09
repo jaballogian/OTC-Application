@@ -10,4 +10,6 @@
     <color name="grey">#2D2D2D99</color>
     <color name="light_grey">#A9B0BB</color>
     <color name="shadow">#00000033</color>
+    <color name="light_chocolate">#F4F4E2</color>
+    <color name="dark_grey">#636C77</color>
 </resources>

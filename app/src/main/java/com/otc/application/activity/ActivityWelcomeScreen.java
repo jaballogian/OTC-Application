@@ -30,7 +30,7 @@ public class ActivityWelcomeScreen extends AppCompatActivity {
     }
 
     private void moveToMainAcitivty(){
-        Intent toActivityMain = new Intent(ActivityWelcomeScreen.this, ActivityHome.class);
+        Intent toActivityMain = new Intent(ActivityWelcomeScreen.this, ActivityHomeVideoPembelajaran.class);
         toActivityMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(toActivityMain);
         finish();
