@@ -50,22 +50,26 @@ public class CommonMethods {
         inputTextView.setText(spannableStringBuilder);
     }
 
-    public interface FirebaseCallback{
+    public interface FirebaseCallbackArrayList{
         void onCallback(ArrayList<String> arrayList);
     }
 
-    public ArrayList<String> readKeyArrayListFromDatabase(DatabaseReference inputDatabaseReference, final FirebaseCallback inputFirebaseCallback){
+    public interface FirebaseCallbackHashMap{
+        void onCallback(HashMap<String, String> hashMap);
+    }
+
+    public ArrayList<String> readKeyArrayListFromDatabase(DatabaseReference inputDatabaseReference, final FirebaseCallbackArrayList inputFirebaseCallback){
 
         final ArrayList<String> outputArrayList = new ArrayList<String>();
         inputDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String value;
+                String key;
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
 
-                    value = ds.getKey();
-                    outputArrayList.add(value);
+                    key = ds.getKey();
+                    outputArrayList.add(key);
                 }
                 inputFirebaseCallback.onCallback(outputArrayList);
             }
@@ -77,6 +81,32 @@ public class CommonMethods {
         });
 
         return outputArrayList;
+    }
+
+    public HashMap<String, String> readValueArrayListFromDatabase(DatabaseReference inputDatabaseReference, final FirebaseCallbackHashMap inputFirebaseCallback){
+
+        final HashMap<String, String> outputHashmap = new HashMap<String, String>();
+        inputDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String key, value;
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+
+                    key = ds.getKey();
+                    value = ds.getValue().toString();
+                    outputHashmap.put(key, value);
+                }
+                inputFirebaseCallback.onCallback(outputHashmap);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return outputHashmap;
     }
 
     public void readKeyArrayListFromDatabase(DatabaseReference inputDatabaseReference, final Spinner inputSpinner){

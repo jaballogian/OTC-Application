@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.otc.application.R;
@@ -17,14 +19,20 @@ import com.otc.application.item.ItemProgram;
 import com.otc.application.others.CommonMethods;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ActivityHome extends AppCompatActivity {
 
-    private DatabaseReference namaProgramReference;
+    private DatabaseReference databaseReference, namaProgramReference, profilPenggunaReference;
     private ArrayList<ItemProgram> programArrayList;
     private ArrayList<String> namaProgramArrayList;
     private CommonMethods commonMethods;
     private RecyclerView programRecylerView;
+    private TextView namaPenggunaTextView, namaSekolahTextView, jenisAkunTextView;
+    private HashMap<String, String> userDataHashMap;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private String uID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +43,14 @@ public class ActivityHome extends AppCompatActivity {
 
         commonMethods = new CommonMethods(this);
 
-        namaProgramReference = FirebaseDatabase.getInstance().getReference().child("Halaman").child("Home").child("Program");
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        uID = currentUser.getUid();
 
-        commonMethods.readKeyArrayListFromDatabase(namaProgramReference, new CommonMethods.FirebaseCallback() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        namaProgramReference = databaseReference.child("Halaman").child("Home").child("Program");
+
+        commonMethods.readKeyArrayListFromDatabase(namaProgramReference, new CommonMethods.FirebaseCallbackArrayList() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
 
@@ -49,6 +62,24 @@ public class ActivityHome extends AppCompatActivity {
                 programArrayList = new ArrayList<ItemProgram>();
                 assignArrayListStringToArrayListProgram(namaProgramArrayList, programArrayList);
                 setValueToRecylerView();
+            }
+        });
+
+        namaPenggunaTextView = (TextView) findViewById(R.id.namaPenggunaTextView);
+        namaSekolahTextView = (TextView) findViewById(R.id.namaSekolahTextView);
+        jenisAkunTextView = (TextView) findViewById(R.id.jenisAkunTextView);
+
+        profilPenggunaReference = databaseReference.child("Sementara").child("Pengguna").child(uID).child("Profil");
+
+        userDataHashMap = new HashMap<String, String>();
+        commonMethods.readValueArrayListFromDatabase(profilPenggunaReference, new CommonMethods.FirebaseCallbackHashMap() {
+            @Override
+            public void onCallback(HashMap<String, String> hashMap) {
+                userDataHashMap = hashMap;
+
+                namaPenggunaTextView.setText(userDataHashMap.get(getString(R.string.nama_lengkap_beserta_gelar)));
+                //TODO: set text of "namaSekolahTextView" here
+                jenisAkunTextView.setText(userDataHashMap.get(getString(R.string.jenis_akun)));
             }
         });
     }

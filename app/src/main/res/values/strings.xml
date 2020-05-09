@@ -1,4 +1,8 @@
 <resources>
+
+    <string name="spinner">Spinner</string>
+    <string name="text_view">Text View</string>
+
     <string name="OTC">OTC</string>
     <string name="siap_untuk_menjadi_medalist">Siap untuk menjadi medalist?</string>
     <string name="masuk">Masuk</string>
