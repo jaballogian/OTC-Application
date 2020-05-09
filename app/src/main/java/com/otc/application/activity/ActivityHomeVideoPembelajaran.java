@@ -14,21 +14,5 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_video_pembelajaran);
-
-        checkingUser();
-    }
-
-    private void checkingUser(){
-
-        if(FirebaseAuth.getInstance().getCurrentUser() == null){
-            moveToActivitySignIn();
-        }
-    }
-
-    private void moveToActivitySignIn(){
-        Intent toActivitySignIn = new Intent(ActivityHomeVideoPembelajaran.this, ActivitySignIn.class);
-        toActivitySignIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(toActivitySignIn);
-        finish();
     }
 }

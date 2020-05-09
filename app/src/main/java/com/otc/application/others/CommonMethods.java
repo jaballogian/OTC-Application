@@ -47,7 +47,36 @@ public class CommonMethods {
         inputTextView.setText(spannableStringBuilder);
     }
 
-    public void readArrayListFromDatabase(DatabaseReference inputDatabaseReference, final Spinner inputSpinner){
+    public interface FirebaseCallback{
+        void onCallback(ArrayList<String> arrayList);
+    }
+
+    public ArrayList<String> readKeyArrayListFromDatabase(DatabaseReference inputDatabaseReference, final FirebaseCallback inputFirebaseCallback){
+
+        final ArrayList<String> outputArrayList = new ArrayList<String>();
+        inputDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String value;
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+
+                    value = ds.getKey();
+                    outputArrayList.add(value);
+                }
+                inputFirebaseCallback.onCallback(outputArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return outputArrayList;
+    }
+
+    public void readKeyArrayListFromDatabase(DatabaseReference inputDatabaseReference, final Spinner inputSpinner){
 
         final ArrayList<String> arrayList = new ArrayList<String>();
         inputDatabaseReference.addValueEventListener(new ValueEventListener() {

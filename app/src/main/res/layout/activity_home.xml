@@ -109,6 +109,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/programTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
@@ -118,5 +119,13 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_margin="20dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/programTextView"
+        android:id="@+id/programRecylerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_program" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

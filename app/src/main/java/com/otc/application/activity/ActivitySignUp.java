@@ -67,10 +67,10 @@ public class ActivitySignUp extends AppCompatActivity {
         userData = new HashMap<>();
 
         spinnerJenisAkun = (AppCompatSpinner) findViewById(R.id.spinnerJenisAkun);
-        commonMethods.readArrayListFromDatabase(jenisAkunReference, spinnerJenisAkun);
+        commonMethods.readKeyArrayListFromDatabase(jenisAkunReference, spinnerJenisAkun);
 
         spinnerJenjangSekolah = (AppCompatSpinner) findViewById(R.id.spinnerJenjangSekolah);
-        commonMethods.readArrayListFromDatabase(jenjangSekolahReference, spinnerJenjangSekolah);
+        commonMethods.readKeyArrayListFromDatabase(jenjangSekolahReference, spinnerJenjangSekolah);
 
         arrayListSpinner = new ArrayList<Spinner>();
         arrayListSpinner.add(spinnerJenisAkun);
@@ -143,11 +143,20 @@ public class ActivitySignUp extends AppCompatActivity {
                     userData.put(getString(R.string.kata_sandi), EncryptionAndDecryption.encrypt(userData.get(getString(R.string.kata_sandi))));
 
                     //TODO: register user here
+
+                    moveToActivityHome();
                 }
             }
         }
         else {
             Toast.makeText(ActivitySignUp.this, getString(R.string.anda_belum_menyetujui_syarat_dan_ketentuan_yang_berlaku), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void moveToActivityHome(){
+        Intent toActivityHome = new Intent(ActivitySignUp.this, ActivityHome.class);
+        toActivityHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(toActivityHome);
+        finish();
     }
 }
