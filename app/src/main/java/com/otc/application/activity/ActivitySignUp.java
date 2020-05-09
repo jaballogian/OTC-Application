@@ -30,14 +30,17 @@ public class ActivitySignUp extends AppCompatActivity {
 
     private TextView textViewSudahPunyaAkunMasukAja, textViewPersetujuan;
     private CommonMethods commonMethods;
-    private DatabaseReference halamanPendaftaranReference, jenisAkunReference, jenjangSekolahReference;
-    private AppCompatSpinner spinnerJenisAkun, spinnerJenjangSekolah, spinnerTipeSekolah, spinnerBidang;
+    private DatabaseReference halamanPendaftaranReference, jenisAkunReference, jenjangSekolahReference, tipeSekolahReference;
+    private AppCompatSpinner spinnerJenisAkun, spinnerJenjangSekolah, spinnerTipeSekolah;
     private Button buttonMasuk;
     private TextInputEditText textInputEditTextNamaLengkap, textInputEditTextEmail, textInputEditTextKataSandi, textInputEditTextNomorWAHandphone, textInputEditTextIDLine, textInputEditTextInstagram;
     private HashMap<String, String> userData, userDataFromEditText, userDataFromSpinner;
     private HashMap<String, EditText> userDataHashMapEditText;
     private ArrayList<Spinner> arrayListSpinner;
     private CheckBox checkBoxPersetujuanPendaftaran;
+
+    public static DatabaseReference bidangReference, bidangSDReference, bidangSMPReference, bidangSMAReference;
+    public static AppCompatSpinner spinnerBidang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +52,22 @@ public class ActivitySignUp extends AppCompatActivity {
         halamanPendaftaranReference = FirebaseDatabase.getInstance().getReference().child("Halaman").child("Pendaftaran");
         jenisAkunReference = halamanPendaftaranReference.child("Jenis Akun");
         jenjangSekolahReference = halamanPendaftaranReference.child("Jenjang Sekolah");
+        tipeSekolahReference = halamanPendaftaranReference.child("Tipe Sekolah");
+
+        bidangReference = halamanPendaftaranReference.child("Bidang");
+        bidangSDReference = bidangReference.child("SD").child("Bidang");
+        bidangSMPReference = bidangReference.child("SMP").child("Bidang");
+        bidangSMAReference = bidangReference.child("SMA").child("Bidang");
 
         textViewSudahPunyaAkunMasukAja = (TextView) findViewById(R.id.textViewSudahPunyaAkunMasukAja);
         commonMethods.splitTextViewIntoTwoColors(textViewSudahPunyaAkunMasukAja, getString(R.string.sudah_punya_akun_masuk_aja),
                 getResources().getColor(R.color.black), getResources().getColor(R.color.light_orange), 0, 17, 18, 29);
+        textViewSudahPunyaAkunMasukAja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToActivitySignIn();
+            }
+        });
 
         textViewPersetujuan = (TextView) findViewById(R.id.textViewPersetujuan);
         commonMethods.splitTextViewIntoTwoColors(textViewPersetujuan, getString(R.string.persetujuan_pendafataran),
@@ -72,14 +87,18 @@ public class ActivitySignUp extends AppCompatActivity {
         spinnerJenjangSekolah = (AppCompatSpinner) findViewById(R.id.spinnerJenjangSekolah);
         commonMethods.readKeyArrayListFromDatabase(jenjangSekolahReference, spinnerJenjangSekolah);
 
+        spinnerTipeSekolah = (AppCompatSpinner) findViewById(R.id.spinnerTipeSekolah);
+        commonMethods.readKeyArrayListFromDatabase(tipeSekolahReference, spinnerTipeSekolah);
+
+        spinnerBidang = (AppCompatSpinner) findViewById(R.id.spinnerBidang);
+
         arrayListSpinner = new ArrayList<Spinner>();
         arrayListSpinner.add(spinnerJenisAkun);
         arrayListSpinner.add(spinnerJenjangSekolah);
+        arrayListSpinner.add(spinnerTipeSekolah);
+        arrayListSpinner.add(spinnerBidang);
 
         userDataFromSpinner = commonMethods.handleSpinnderOnItemClicked(arrayListSpinner);
-
-        spinnerTipeSekolah = (AppCompatSpinner) findViewById(R.id.spinnerTipeSekolah);
-        //TODO: define and read "tipe sekolah" from database
 
         textInputEditTextNamaLengkap = (TextInputEditText) findViewById(R.id.textInputEditTextNamaLengkap);
         textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
@@ -97,9 +116,6 @@ public class ActivitySignUp extends AppCompatActivity {
         userDataHashMapEditText.put(getString(R.string.id_line_opsional), textInputEditTextIDLine);
 
         userDataFromEditText = new HashMap<>();
-
-        spinnerBidang = (AppCompatSpinner) findViewById(R.id.spinnerBidang);
-        //TODO: define and read "bidang" from database
 
         checkBoxPersetujuanPendaftaran = (CheckBox) findViewById(R.id.checkBoxPersetujuanPendaftaran);
 
@@ -132,19 +148,20 @@ public class ActivitySignUp extends AppCompatActivity {
             else {
 
                 if(userDataFromSpinner.get(getString(R.string.jenis_akun)).equals(getString(R.string.jenis_akun))
-                        || userDataFromSpinner.get(getString(R.string.jenjang_sekolah)).equals(getString(R.string.jenjang_sekolah))){
+                        || userDataFromSpinner.get(getString(R.string.jenjang_sekolah)).equals(getString(R.string.jenjang_sekolah))
+                        || userDataFromSpinner.get(getString(R.string.tipe_sekolah)).equals(getString(R.string.tipe_sekolah))){
                     Toast.makeText(ActivitySignUp.this, getString(R.string.pilih_jenis_akun_dan_jenjang_akun_yang_valid), Toast.LENGTH_LONG).show();
                 }
                 else {
                     userData.putAll(userDataFromEditText);
                     userData.putAll(userDataFromSpinner);
-                    Log.d("userData", userData.toString());
 
                     userData.put(getString(R.string.kata_sandi), EncryptionAndDecryption.encrypt(userData.get(getString(R.string.kata_sandi))));
+                    Log.d("userData", userData.toString());
 
                     //TODO: register user here
 
-                    moveToActivityHome();
+//                    moveToActivityHome();
                 }
             }
         }
@@ -157,6 +174,12 @@ public class ActivitySignUp extends AppCompatActivity {
         Intent toActivityHome = new Intent(ActivitySignUp.this, ActivityHome.class);
         toActivityHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(toActivityHome);
+        finish();
+    }
+
+    private void moveToActivitySignIn(){
+        Intent toActivitySignIn = new Intent(ActivitySignUp.this, ActivitySignIn.class);
+        startActivity(toActivitySignIn);
         finish();
     }
 }

@@ -20,6 +20,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.otc.application.R;
+import com.otc.application.activity.ActivitySignUp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,8 +131,22 @@ public class CommonMethods {
 
                     String key = element.getAdapter().getItem(0).toString();
                     String value = parent.getItemAtPosition(position).toString();
-                    Log.d("keyInputSpinner", key + " " + value);
                     outputHashMap.put(key, value);
+
+                    if(key.equals(context.getString(R.string.jenjang_sekolah))){
+                        if(value.equals(context.getString(R.string.sd))){
+                            readKeyArrayListFromDatabase(ActivitySignUp.bidangSDReference, ActivitySignUp.spinnerBidang);
+                            Log.d("reference", ActivitySignUp.bidangSDReference.toString());
+                        }
+                        else if(value.equals(context.getString(R.string.smp))){
+                            readKeyArrayListFromDatabase(ActivitySignUp.bidangSMPReference, ActivitySignUp.spinnerBidang);
+                            Log.d("reference", ActivitySignUp.bidangSMPReference.toString());
+                        }
+                        else if(value.equals(context.getString(R.string.sma))){
+                            readKeyArrayListFromDatabase(ActivitySignUp.bidangSMAReference, ActivitySignUp.spinnerBidang);
+                            Log.d("reference", ActivitySignUp.bidangSMAReference.toString());
+                        }
+                    }
                 }
 
                 @Override

@@ -31,7 +31,7 @@ public class ActivityHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-//        checkingUser();
+        checkingUser();
 
         commonMethods = new CommonMethods(this);
 
