@@ -107,8 +107,23 @@ public class ActivityHome extends AppCompatActivity {
     }
 
     private void setValueToRecylerView(){
-        programRecylerView.setLayoutManager(new GridLayoutManager(this, 3));
+        programRecylerView.setLayoutManager(new GridLayoutManager(this, 4));
         GridProgramAdapter gridProgramAdapter = new GridProgramAdapter(programArrayList);
         programRecylerView.setAdapter(gridProgramAdapter);
+
+        gridProgramAdapter.setOnItemClickCallback(new GridProgramAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(ItemProgram itemProgram) {
+                moveToAnotherAcvitity(itemProgram);
+            }
+        });
+    }
+
+    private void moveToAnotherAcvitity(ItemProgram inputItemProgram){
+        if(inputItemProgram.getNamaProgram().equals(getString(R.string.video_pembelajaran))){
+            Intent intent = new Intent(ActivityHome.this, ActivityHomeVideoPembelajaran.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

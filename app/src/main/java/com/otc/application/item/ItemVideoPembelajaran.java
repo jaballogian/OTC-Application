@@ -1,5 +1,5 @@
 package com.otc.application.item;
 
-public class ItemVideo {
+public class ItemVideoPembelajaran {
 
 }

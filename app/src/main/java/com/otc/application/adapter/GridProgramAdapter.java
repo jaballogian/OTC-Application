@@ -28,10 +28,25 @@ public class GridProgramAdapter extends RecyclerView.Adapter<GridProgramAdapter.
         return new GridViewHolder(view);
     }
 
+    private OnItemClickCallback onItemClickCallback;
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+    public interface OnItemClickCallback {
+        void onItemClicked(ItemProgram itemProgram);
+    }
+
     @Override
-    public void onBindViewHolder(@NonNull GridProgramAdapter.GridViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final GridProgramAdapter.GridViewHolder holder, int position) {
         ItemProgram itemProgram = listProgram.get(position);
         holder.namaProgramTextView.setText(itemProgram.getNamaProgram());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(listProgram.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
