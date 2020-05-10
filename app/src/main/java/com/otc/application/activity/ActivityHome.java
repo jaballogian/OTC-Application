@@ -122,6 +122,7 @@ public class ActivityHome extends AppCompatActivity {
     private void moveToAnotherAcvitity(ItemProgram inputItemProgram){
         if(inputItemProgram.getNamaProgram().equals(getString(R.string.video_pembelajaran))){
             Intent intent = new Intent(ActivityHome.this, ActivityHomeVideoPembelajaran.class);
+            intent.putExtra("userDataHashMap", userDataHashMap);
             startActivity(intent);
             finish();
         }
