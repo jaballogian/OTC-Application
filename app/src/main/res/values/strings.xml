@@ -1,8 +1,10 @@
 <resources>
 
+<!--    COMPONENTS-->
     <string name="spinner">Spinner</string>
     <string name="text_view">Text View</string>
 
+<!--    WORDS-->
     <string name="OTC">OTC</string>
     <string name="siap_untuk_menjadi_medalist">Siap untuk menjadi medalist?</string>
     <string name="masuk">Masuk</string>
@@ -43,6 +45,8 @@
     <string name="email_dan_kata_sandi_tidak_tepat">Email dan kata sandi tidak tepat</string>
 
     <string name="video_pembelajaran">Video Pembelajaran</string>
+
+<!--    COMMANDS-->
 
     <string name="syarat_dan_ketentuan_pengguna_platform">Syarat dan Ketentuan ini merupakan perjanjian antara pengguna (“Anda”) dan OSN-Training Center (“Kami”), yaitu sebuah perusahaan yang didirikan dan beroperasi secara sah berdasarkan hukum Negara Republik Indonesia. Syarat dan Ketentuan ini mengatur Anda saat mengakses dan menggunakan aplikasi, situs web (www.elearningolimpiade.com dan situs web lain yang Kami kelola), fitur, teknologi, konten dan produk yang Kami sediakan (selanjutnya, secara Bersama-sama disebut sebagai “Platform”),
         \n\nHarap membaca Syarat dan Ketentuan ini secara seksama sebelum Anda mulai menggunakan Platform Kami, karena peraturan ini berlaku pada penggunaan Anda terhadap Platform Kami Syarat dan Ketentuan ini mencakup hal-hal sebagai berikut:

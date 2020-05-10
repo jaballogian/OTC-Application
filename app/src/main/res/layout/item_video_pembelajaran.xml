@@ -23,7 +23,7 @@
         android:text="@string/hanya_test"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/itemVideoImageView"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="110dp"

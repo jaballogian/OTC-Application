@@ -54,12 +54,6 @@ public class GridProgramAdapter extends RecyclerView.Adapter<GridProgramAdapter.
         return listProgram.size();
     }
 
-//    public class GridViewHolder extends RecyclerView.ViewHolder {
-//        public GridViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//        }
-//    }
-
     public class GridViewHolder extends RecyclerView.ViewHolder {
         TextView namaProgramTextView;
 

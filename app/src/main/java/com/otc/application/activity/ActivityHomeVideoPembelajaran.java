@@ -1,7 +1,6 @@
 package com.otc.application.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.otc.application.R;
@@ -30,6 +28,7 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
     private CommonMethods commonMethods;
     private RecyclerView babRecylerView;
     private ArrayList<ItemVideoPembelajaran> videoPembelajaranArrayList;
+    private String urlVideoPembelajaran, keyDatabaseReference, subbabDatabaseReference, materiDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +38,31 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
         commonMethods = new CommonMethods(this);
 
         userDataHashMap = (HashMap<String, String>) getIntent().getSerializableExtra("userDataHashMap");
-        videoPembelajaranReference = FirebaseDatabase.getInstance().getReference().child("Peta Materi").child("KSN")
-                .child(userDataHashMap.get(getString(R.string.jenjang_sekolah)))
-                .child(userDataHashMap.get(getString(R.string.bidang)).toUpperCase());
+        keyDatabaseReference = getIntent().getExtras().getString("keyDatabaseReference");
+
+        urlVideoPembelajaran = getIntent().getExtras().getString("databaseReference");
+        if(keyDatabaseReference.equals("bab")){
+            videoPembelajaranReference = FirebaseDatabase.getInstance().getReference().child("Peta Materi").child("KSN")
+                    .child(userDataHashMap.get(getString(R.string.jenjang_sekolah)))
+                    .child(userDataHashMap.get(getString(R.string.bidang)).toUpperCase());
+        }
+        else if(keyDatabaseReference.equals("subbab")){
+
+            subbabDatabaseReference = getIntent().getExtras().getString("subbabDatabaseReference");
+            videoPembelajaranReference = FirebaseDatabase.getInstance().getReference().child("Peta Materi").child("KSN")
+                    .child(userDataHashMap.get(getString(R.string.jenjang_sekolah)))
+                    .child(userDataHashMap.get(getString(R.string.bidang)).toUpperCase())
+                    .child(subbabDatabaseReference);
+        }
+        else if(keyDatabaseReference.equals("materi")){
+            subbabDatabaseReference = getIntent().getExtras().getString("subbabDatabaseReference");
+            materiDatabaseReference = getIntent().getExtras().getString("materiDatabaseReference");
+            videoPembelajaranReference = FirebaseDatabase.getInstance().getReference().child("Peta Materi").child("KSN")
+                    .child(userDataHashMap.get(getString(R.string.jenjang_sekolah)))
+                    .child(userDataHashMap.get(getString(R.string.bidang)).toUpperCase())
+                    .child(subbabDatabaseReference)
+                    .child(materiDatabaseReference);
+        }
 
         babArrayList = new ArrayList<String>();
         commonMethods.readKeyArrayListFromDatabase(videoPembelajaranReference, new CommonMethods.FirebaseCallbackArrayList() {
@@ -70,5 +91,31 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
         babRecylerView.setLayoutManager(new LinearLayoutManager(this));
         ListVideoPembelajaranAdapter listVideoPembelajaranAdapter = new ListVideoPembelajaranAdapter(videoPembelajaranArrayList);
         babRecylerView.setAdapter(listVideoPembelajaranAdapter);
+
+        listVideoPembelajaranAdapter.setOnItemClickCallback(new ListVideoPembelajaranAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(ItemVideoPembelajaran itemVideoPembelajaran) {
+                restartActivity(itemVideoPembelajaran);
+            }
+        });
+    }
+
+    private void restartActivity(ItemVideoPembelajaran itemVideoPembelajaran){
+        Intent intent = new Intent(ActivityHomeVideoPembelajaran.this, ActivityHomeVideoPembelajaran.class);
+        intent.putExtra("userDataHashMap", userDataHashMap);
+
+        if(keyDatabaseReference.equals("bab")){
+            keyDatabaseReference = "subbab";
+            intent.putExtra("keyDatabaseReference", keyDatabaseReference);
+            intent.putExtra("subbabDatabaseReference", itemVideoPembelajaran.getSubBabVideo());
+        }
+        else if(keyDatabaseReference.equals("subbab")){
+            keyDatabaseReference = "materi";
+            intent.putExtra("keyDatabaseReference", keyDatabaseReference);
+            intent.putExtra("subbabDatabaseReference", subbabDatabaseReference);
+            intent.putExtra("materiDatabaseReference", itemVideoPembelajaran.getSubBabVideo());
+        }
+
+        startActivity(intent);
     }
 }

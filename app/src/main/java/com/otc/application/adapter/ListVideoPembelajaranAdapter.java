@@ -28,10 +28,25 @@ public class ListVideoPembelajaranAdapter extends RecyclerView.Adapter<ListVideo
         return new ListViewHolder(view);
     }
 
+    private ListVideoPembelajaranAdapter.OnItemClickCallback onItemClickCallback;
+    public void setOnItemClickCallback(ListVideoPembelajaranAdapter.OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+    public interface OnItemClickCallback {
+        void onItemClicked(ItemVideoPembelajaran itemVideoPembelajaran);
+    }
+
     @Override
-    public void onBindViewHolder(@NonNull ListVideoPembelajaranAdapter.ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ListVideoPembelajaranAdapter.ListViewHolder holder, int position) {
         ItemVideoPembelajaran itemProgram = listVideoPembelajaran.get(position);
         holder.subBabTextView.setText(itemProgram.getSubBabVideo());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(listVideoPembelajaran.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override

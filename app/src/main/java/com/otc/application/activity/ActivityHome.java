@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -123,6 +122,8 @@ public class ActivityHome extends AppCompatActivity {
         if(inputItemProgram.getNamaProgram().equals(getString(R.string.video_pembelajaran))){
             Intent intent = new Intent(ActivityHome.this, ActivityHomeVideoPembelajaran.class);
             intent.putExtra("userDataHashMap", userDataHashMap);
+            intent.putExtra("databaseReference", "");
+            intent.putExtra("keyDatabaseReference", "bab");
             startActivity(intent);
             finish();
         }
