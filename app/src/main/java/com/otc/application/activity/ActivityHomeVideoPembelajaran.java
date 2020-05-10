@@ -61,7 +61,9 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
                     .child(userDataHashMap.get(getString(R.string.jenjang_sekolah)))
                     .child(userDataHashMap.get(getString(R.string.bidang)).toUpperCase())
                     .child(subbabDatabaseReference)
-                    .child(materiDatabaseReference);
+                    .child(materiDatabaseReference)
+                    .child(getString(R.string.video_pembelajaran).toUpperCase())
+                    .child(getString(R.string.provinsi).toUpperCase());
         }
 
         babArrayList = new ArrayList<String>();
