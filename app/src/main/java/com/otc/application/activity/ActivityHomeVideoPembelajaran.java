@@ -103,21 +103,36 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
     }
 
     private void restartActivity(ItemVideoPembelajaran itemVideoPembelajaran){
-        Intent intent = new Intent(ActivityHomeVideoPembelajaran.this, ActivityHomeVideoPembelajaran.class);
-        intent.putExtra("userDataHashMap", userDataHashMap);
 
         if(keyDatabaseReference.equals("bab")){
+            Intent intent = new Intent(ActivityHomeVideoPembelajaran.this, ActivityHomeVideoPembelajaran.class);
+            intent.putExtra("userDataHashMap", userDataHashMap);
             keyDatabaseReference = "subbab";
             intent.putExtra("keyDatabaseReference", keyDatabaseReference);
             intent.putExtra("subbabDatabaseReference", itemVideoPembelajaran.getSubBabVideo());
+            Log.d("keyDatabaseReference", keyDatabaseReference);
+            startActivity(intent);
         }
         else if(keyDatabaseReference.equals("subbab")){
+            Intent intent = new Intent(ActivityHomeVideoPembelajaran.this, ActivityHomeVideoPembelajaran.class);
+            intent.putExtra("userDataHashMap", userDataHashMap);
             keyDatabaseReference = "materi";
             intent.putExtra("keyDatabaseReference", keyDatabaseReference);
             intent.putExtra("subbabDatabaseReference", subbabDatabaseReference);
             intent.putExtra("materiDatabaseReference", itemVideoPembelajaran.getSubBabVideo());
+            Log.d("keyDatabaseReference", keyDatabaseReference);
+            startActivity(intent);
         }
-
-        startActivity(intent);
+        else if(keyDatabaseReference.equals("materi")){
+            Intent intent1 = new Intent(ActivityHomeVideoPembelajaran.this, ActivityHomeVideoWatchPembelajaran.class);
+            keyDatabaseReference = "video";
+            intent1.putExtra("userDataHashMap", userDataHashMap);
+            intent1.putExtra("keyDatabaseReference", keyDatabaseReference);
+            intent1.putExtra("subbabDatabaseReference", subbabDatabaseReference);
+            intent1.putExtra("materiDatabaseReference", materiDatabaseReference);
+            intent1.putExtra("videoDatabaseReference", itemVideoPembelajaran.getSubBabVideo());
+            Log.d("keyDatabaseReference", keyDatabaseReference);
+            startActivity(intent1);
+        }
     }
 }

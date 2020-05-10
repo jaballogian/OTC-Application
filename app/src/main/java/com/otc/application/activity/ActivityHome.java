@@ -38,55 +38,51 @@ public class ActivityHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        checkingUser();
-
         commonMethods = new CommonMethods(this);
-
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        uID = currentUser.getUid();
-
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        namaProgramReference = databaseReference.child("Halaman").child("Home").child("Program");
-
-        commonMethods.readKeyArrayListFromDatabase(namaProgramReference, new CommonMethods.FirebaseCallbackArrayList() {
-            @Override
-            public void onCallback(ArrayList<String> arrayList) {
-
-                namaProgramArrayList = new ArrayList<String>();
-                namaProgramArrayList = arrayList;
-
-                programRecylerView = (RecyclerView) findViewById(R.id.programRecylerView);
-
-                programArrayList = new ArrayList<ItemProgram>();
-                assignArrayListStringToArrayListProgram(namaProgramArrayList, programArrayList);
-                setValueToRecylerView();
-            }
-        });
-
-        namaPenggunaTextView = (TextView) findViewById(R.id.namaPenggunaTextView);
-        namaSekolahTextView = (TextView) findViewById(R.id.namaSekolahTextView);
-        jenisAkunTextView = (TextView) findViewById(R.id.jenisAkunTextView);
-
-        profilPenggunaReference = databaseReference.child("Sementara").child("Pengguna").child(uID).child("Profil");
-
-        userDataHashMap = new HashMap<String, String>();
-        commonMethods.readValueArrayListFromDatabase(profilPenggunaReference, new CommonMethods.FirebaseCallbackHashMap() {
-            @Override
-            public void onCallback(HashMap<String, String> hashMap) {
-                userDataHashMap = hashMap;
-
-                namaPenggunaTextView.setText(userDataHashMap.get(getString(R.string.nama_lengkap_beserta_gelar)));
-                //TODO: set text of "namaSekolahTextView" here
-                jenisAkunTextView.setText(userDataHashMap.get(getString(R.string.jenis_akun)));
-            }
-        });
-    }
-
-    private void checkingUser(){
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null){
             moveToActivitySignIn();
+        }
+        else {
+            mAuth = FirebaseAuth.getInstance();
+            currentUser = mAuth.getCurrentUser();
+            uID = currentUser.getUid();
+
+            databaseReference = FirebaseDatabase.getInstance().getReference();
+            namaProgramReference = databaseReference.child("Halaman").child("Home").child("Program");
+
+            commonMethods.readKeyArrayListFromDatabase(namaProgramReference, new CommonMethods.FirebaseCallbackArrayList() {
+                @Override
+                public void onCallback(ArrayList<String> arrayList) {
+
+                    namaProgramArrayList = new ArrayList<String>();
+                    namaProgramArrayList = arrayList;
+
+                    programRecylerView = (RecyclerView) findViewById(R.id.programRecylerView);
+
+                    programArrayList = new ArrayList<ItemProgram>();
+                    assignArrayListStringToArrayListProgram(namaProgramArrayList, programArrayList);
+                    setValueToRecylerView();
+                }
+            });
+
+            namaPenggunaTextView = (TextView) findViewById(R.id.namaPenggunaTextView);
+            namaSekolahTextView = (TextView) findViewById(R.id.namaSekolahTextView);
+            jenisAkunTextView = (TextView) findViewById(R.id.jenisAkunTextView);
+
+            profilPenggunaReference = databaseReference.child("Sementara").child("Pengguna").child(uID).child("Profil");
+
+            userDataHashMap = new HashMap<String, String>();
+            commonMethods.readValueArrayListFromDatabase(profilPenggunaReference, new CommonMethods.FirebaseCallbackHashMap() {
+                @Override
+                public void onCallback(HashMap<String, String> hashMap) {
+                    userDataHashMap = hashMap;
+
+                    namaPenggunaTextView.setText(userDataHashMap.get(getString(R.string.nama_lengkap_beserta_gelar)));
+                    //TODO: set text of "namaSekolahTextView" here
+                    jenisAkunTextView.setText(userDataHashMap.get(getString(R.string.jenis_akun)));
+                }
+            });
         }
     }
 
