@@ -1,4 +1,4 @@
-package com.otc.application.activity.ui.home;
+package com.otc.application.activity.ui.pembelian;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,17 +16,17 @@ import com.otc.application.R;
 
 //import com.otc.application.activity.R;
 
-public class HomeFragment extends Fragment {
+public class PembelianFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private PembelianViewModel pembelianViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        pembelianViewModel =
+                ViewModelProviders.of(this).get(PembelianViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_pembelian, container, false);
+        final TextView textView = root.findViewById(R.id.text_dashboard);
+        pembelianViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

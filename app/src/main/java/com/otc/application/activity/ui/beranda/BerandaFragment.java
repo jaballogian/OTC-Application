@@ -1,4 +1,4 @@
-package com.otc.application.activity.ui.dashboard;
+package com.otc.application.activity.ui.beranda;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,17 +16,17 @@ import com.otc.application.R;
 
 //import com.otc.application.activity.R;
 
-public class DashboardFragment extends Fragment {
+public class BerandaFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private BerandaViewModel berandaViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        berandaViewModel =
+                ViewModelProviders.of(this).get(BerandaViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_beranda, container, false);
+        final TextView textView = root.findViewById(R.id.text_home);
+        berandaViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
