@@ -71,4 +71,8 @@
         \n\nSebelum menggunakan Platform, Anda menyetujui Syarat dan Ketentuan ini, dan mendaftarkan diri Anda dengan memberikan informasi yang Kami butuhkan. Saat melakukan pendaftaran, Kami akan meminta Anda untuk memberikan nama lengkap, alamat surat elektronik dan nomor telepon genggam pribadi Anda. Kami juga dapat menghentikan penggunaan Platform jika dikemudian hari data-data yang Anda berikan kepada Kami terbukti tidak benar.
         \n\nSistem Kami akan membuatkan akun pada Platform (“Akun”) untuk Anda yang dapat digunakan untuk menggunakan Platform dan memesan layanan melalui Platform.
         \n\nDalam hal Anda telah keluar dari Akun Anda, maka Anda perlu memasukan alamat surat elektronik yang ada berikan pada saat mendaftarkan diri Anda dan memasukan password.</string>
+    <string name="title_activity_home">ActivityHome</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.otc.application">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +11,11 @@
         android:roundIcon="@drawable/application_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.ActivityHomeVideoWatchPembelajaran"></activity>
-        <activity android:name=".activity.ActivityHome" />
+        <activity
+            android:name=".activity.ActivityHome"
+            android:label="@string/title_activity_home"></activity>
+        <activity android:name=".activity.ActivityHomeVideoWatchPembelajaran" />
+        <activity android:name=".activity.ActivityHomeDEPRECATED" />
         <activity android:name=".activity.ActivityTermsAndCondition" />
         <activity android:name=".activity.ActivityHomeVideoPembelajaran" />
         <activity android:name=".activity.ActivitySignUp" />
