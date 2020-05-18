@@ -1,18 +1,24 @@
-package com.otc.application.activity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.otc.application.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.otc.application.R;
+import com.otc.application.activity.ActivityHomeVideoPembelajaran;
+import com.otc.application.activity.ActivitySignIn;
 import com.otc.application.adapter.GridProgramAdapter;
 import com.otc.application.item.ItemProgram;
 import com.otc.application.others.CommonMethods;
@@ -20,7 +26,7 @@ import com.otc.application.others.CommonMethods;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ActivityHomeDEPRECATED extends AppCompatActivity {
+public class BerandaFragment extends Fragment {
 
     private DatabaseReference databaseReference, namaProgramReference, profilPenggunaReference;
     private ArrayList<ItemProgram> programArrayList;
@@ -33,12 +39,12 @@ public class ActivityHomeDEPRECATED extends AppCompatActivity {
     private FirebaseUser currentUser;
     private String uID;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_deprecated);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
 
-        commonMethods = new CommonMethods(this);
+        final View root = inflater.inflate(R.layout.fragment_beranda, container, false);
+
+        commonMethods = new CommonMethods(getContext());
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null){
             moveToActivitySignIn();
@@ -58,7 +64,7 @@ public class ActivityHomeDEPRECATED extends AppCompatActivity {
                     namaProgramArrayList = new ArrayList<String>();
                     namaProgramArrayList = arrayList;
 
-                    programRecylerView = (RecyclerView) findViewById(R.id.programRecylerView);
+                    programRecylerView = (RecyclerView) root.findViewById(R.id.programRecylerView);
 
                     programArrayList = new ArrayList<ItemProgram>();
                     assignArrayListStringToArrayListProgram(namaProgramArrayList, programArrayList);
@@ -66,9 +72,9 @@ public class ActivityHomeDEPRECATED extends AppCompatActivity {
                 }
             });
 
-            namaPenggunaTextView = (TextView) findViewById(R.id.namaPenggunaTextView);
-            namaSekolahTextView = (TextView) findViewById(R.id.namaSekolahTextView);
-            jenisAkunTextView = (TextView) findViewById(R.id.jenisAkunTextView);
+            namaPenggunaTextView = (TextView) root.findViewById(R.id.namaPenggunaTextView);
+            namaSekolahTextView = (TextView) root.findViewById(R.id.namaSekolahTextView);
+            jenisAkunTextView = (TextView) root.findViewById(R.id.jenisAkunTextView);
 
             profilPenggunaReference = databaseReference.child("Sementara").child("Pengguna").child(uID).child("Profil");
 
@@ -84,13 +90,15 @@ public class ActivityHomeDEPRECATED extends AppCompatActivity {
                 }
             });
         }
+
+        return root;
     }
 
     private void moveToActivitySignIn(){
-        Intent toActivitySignIn = new Intent(ActivityHomeDEPRECATED.this, ActivitySignIn.class);
+        Intent toActivitySignIn = new Intent(getContext(), ActivitySignIn.class);
         toActivitySignIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(toActivitySignIn);
-        finish();
+        getActivity().finish();
     }
 
     private void assignArrayListStringToArrayListProgram(ArrayList<String> inputNamaProgramArrayList, ArrayList<ItemProgram> inputItemProgramArrayList){
@@ -102,7 +110,7 @@ public class ActivityHomeDEPRECATED extends AppCompatActivity {
     }
 
     private void setValueToRecylerView(){
-        programRecylerView.setLayoutManager(new GridLayoutManager(this, 4));
+        programRecylerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         GridProgramAdapter gridProgramAdapter = new GridProgramAdapter(programArrayList);
         programRecylerView.setAdapter(gridProgramAdapter);
 
@@ -116,12 +124,12 @@ public class ActivityHomeDEPRECATED extends AppCompatActivity {
 
     private void moveToAnotherAcvitity(ItemProgram inputItemProgram){
         if(inputItemProgram.getNamaProgram().equals(getString(R.string.video_pembelajaran))){
-            Intent intent = new Intent(ActivityHomeDEPRECATED.this, ActivityHomeVideoPembelajaran.class);
+            Intent intent = new Intent(getContext(), ActivityHomeVideoPembelajaran.class);
             intent.putExtra("userDataHashMap", userDataHashMap);
             intent.putExtra("databaseReference", "");
             intent.putExtra("keyDatabaseReference", "bab");
             startActivity(intent);
-            finish();
+            getActivity().finish();
         }
     }
 }

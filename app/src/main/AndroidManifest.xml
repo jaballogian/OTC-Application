@@ -13,9 +13,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".activity.ActivityHome"
-            android:label="@string/title_activity_home"></activity>
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activity.ActivityHomeVideoWatchPembelajaran" />
-        <activity android:name=".activity.ActivityHomeDEPRECATED" />
         <activity android:name=".activity.ActivityTermsAndCondition" />
         <activity android:name=".activity.ActivityHomeVideoPembelajaran" />
         <activity android:name=".activity.ActivitySignUp" />

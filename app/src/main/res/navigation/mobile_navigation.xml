@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_beranda"
-        android:name="com.otc.application.activity.ui.beranda.BerandaFragment"
+        android:name="com.otc.application.fragment.BerandaFragment"
         android:label="@string/beranda"
         tools:layout="@layout/fragment_beranda" />
 
     <fragment
         android:id="@+id/navigation_pembelian"
-        android:name="com.otc.application.activity.ui.pembelian.PembelianFragment"
+        android:name="com.otc.application.fragment.PembelianFragment"
         android:label="@string/pembelian"
         tools:layout="@layout/fragment_pembelian" />
 
     <fragment
         android:id="@+id/navigation_notifikasi"
-        android:name="com.otc.application.activity.ui.notifications.NotifikasiFragment"
+        android:name="com.otc.application.fragment.NotifikasiFragment"
         android:label="@string/notifikasi"
         tools:layout="@layout/fragment_notifikasi" />
 
     <fragment
         android:id="@+id/navigation_akun"
-        android:name="com.otc.application.activity.ui.akun.AkunFragment"
+        android:name="com.otc.application.fragment.AkunFragment"
         android:label="@string/akun"
         tools:layout="@layout/fragment_akun" />
 </navigation>

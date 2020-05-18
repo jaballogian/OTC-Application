@@ -16,4 +16,9 @@
         <item name="android:textSize">21sp</item>
         <item name="android:textStyle">normal</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:actionBarSize">0dp</item>
+    </style>
 </resources>
