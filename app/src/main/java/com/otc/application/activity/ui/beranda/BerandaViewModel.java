@@ -10,7 +10,7 @@ public class BerandaViewModel extends ViewModel {
 
     public BerandaViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("beranda");
     }
 
     public LiveData<String> getText() {

@@ -10,7 +10,7 @@ public class PembelianViewModel extends ViewModel {
 
     public PembelianViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("pembelian");
     }
 
     public LiveData<String> getText() {

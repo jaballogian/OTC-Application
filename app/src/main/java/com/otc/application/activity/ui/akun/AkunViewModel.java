@@ -9,7 +9,7 @@ public class AkunViewModel extends ViewModel {
 
     public AkunViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("akun");
     }
 
     public LiveData<String> getText() {

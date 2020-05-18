@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_akun"
-        android:name="com.otc.application.activity.ui.notifications.NotifikasiFragment"
+        android:name="com.otc.application.activity.ui.akun.AkunFragment"
         android:label="@string/akun"
-        tools:layout="@layout/fragment_notifikasi" />
+        tools:layout="@layout/fragment_akun" />
 </navigation>
