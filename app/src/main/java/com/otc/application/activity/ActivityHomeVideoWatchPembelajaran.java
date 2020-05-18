@@ -32,6 +32,7 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
         setContentView(R.layout.activity_home_video_watch_pembelajaran);
 
         commonMethods = new CommonMethods(this);
+        commonMethods.blockScreenCapture(this);
 
         userDataHashMap = (HashMap<String, String>) getIntent().getSerializableExtra("userDataHashMap");
 
