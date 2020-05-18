@@ -7,11 +7,19 @@
     tools:context=".activity.ActivityHomeVideoWatchPembelajaran"
     android:background="@color/white">
 
-    <VideoView
+<!--    <VideoView-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:id="@+id/videoView"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"/>-->
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/exoplayer"
         android:layout_margin="20dp"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/videoView"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 

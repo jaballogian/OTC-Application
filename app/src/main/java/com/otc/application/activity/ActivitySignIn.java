@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.otc.application.encryptionanddecryption.EncryptionAndDecryption;
 import com.otc.application.others.CommonMethods;
 import com.otc.application.R;
 
@@ -91,7 +92,7 @@ public class ActivitySignIn extends AppCompatActivity {
 
     private void logInUser(HashMap<String, String> inputHashMap){
 
-        mAuth.signInWithEmailAndPassword(inputHashMap.get(getString(R.string.email)), inputHashMap.get(getString(R.string.kata_sandi)))
+        mAuth.signInWithEmailAndPassword(inputHashMap.get(getString(R.string.email)), EncryptionAndDecryption.encrypt(inputHashMap.get(getString(R.string.kata_sandi))))
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
