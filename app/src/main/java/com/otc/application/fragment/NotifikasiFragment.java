@@ -13,9 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.otc.application.R;
-import com.otc.application.activity.ui.notifications.NotifikasiViewModel;
-
-//import com.otc.application.activity.R;
 
 public class NotifikasiFragment extends Fragment {
 

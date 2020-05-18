@@ -13,8 +13,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".activity.ActivityHome"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="@string/title_activity_home"/>
         <activity android:name=".activity.ActivityHomeVideoWatchPembelajaran" />
         <activity android:name=".activity.ActivityTermsAndCondition" />
         <activity android:name=".activity.ActivityHomeVideoPembelajaran" />

@@ -13,9 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.otc.application.R;
-import com.otc.application.activity.ui.pembelian.PembelianViewModel;
-
-//import com.otc.application.activity.R;
 
 public class PembelianFragment extends Fragment {
 

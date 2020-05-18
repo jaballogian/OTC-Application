@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.otc.application.R;
-import com.otc.application.activity.ui.akun.AkunViewModel;
 
 public class AkunFragment extends Fragment {
 
