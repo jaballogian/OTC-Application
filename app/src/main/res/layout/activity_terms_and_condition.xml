@@ -16,7 +16,7 @@
         app:titleTextColor="@android:color/black"
         android:background="?attr/colorPrimary"
         app:title="@string/syarat_dan_ketentuan"
-        app:titleTextAppearance="@style/Toolbar.TitleText">
+        app:titleTextAppearance="@style/Toolbar.TitleText21">
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView

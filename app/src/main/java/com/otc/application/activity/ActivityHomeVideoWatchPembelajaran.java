@@ -93,19 +93,18 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
                 judulVideo = hashMap.get("JUDUL");
                 deskripsiKontenTextView = (TextView) findViewById(R.id.deskripsiKontenTextView);
                 deskripsiKontenTextView.setText(deskripsiVideo);
-                Log.d("hashMap", urlVideo);
+                Log.d("hashMap", hashMap.toString());
 
                 playVideo(urlVideo);
+                setToolbar(judulVideo);
             }
         });
-
-        setToolbar();
     }
 
-    private void setToolbar(){
+    private void setToolbar(String inputTitle){
         toolbar = (Toolbar) findViewById(R.id.toolbarWatchVideo);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(judulVideo);
+        toolbar.setTitle(inputTitle);
         toolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
