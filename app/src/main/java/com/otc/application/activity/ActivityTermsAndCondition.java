@@ -20,9 +20,7 @@ public class ActivityTermsAndCondition extends AppCompatActivity {
         setContentView(R.layout.activity_terms_and_condition);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarSyaratDanKetentuan);
-
         toolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

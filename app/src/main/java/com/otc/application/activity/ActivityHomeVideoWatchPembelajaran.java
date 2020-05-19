@@ -2,10 +2,15 @@ package com.otc.application.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -28,7 +33,6 @@ import com.otc.application.item.ItemVideoPembelajaran;
 import com.otc.application.others.CommonMethods;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.otc.application.others.ReadDataFromFirebase;
-
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
@@ -38,11 +42,13 @@ import javax.sql.DataSource;
 public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
 
     private DatabaseReference videoReference;
-    private String subbabDatabaseReference, materiDatabaseReference, videoDatabaseReference, urlVideo;
+    private String subbabDatabaseReference, materiDatabaseReference, videoDatabaseReference, urlVideo, deskripsiVideo, judulVideo;
     private HashMap<String, String> userDataHashMap;
     private CommonMethods commonMethods;
     private ReadDataFromFirebase readDataFromFirebase;
-    private VideoView videoView;
+    private Toolbar toolbar;
+    private ImageButton homeImageButton;
+    private TextView deskripsiKontenTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,14 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
         commonMethods.blockScreenCapture(this);
 
         readDataFromFirebase = new ReadDataFromFirebase(this);
+
+        homeImageButton = (ImageButton) findViewById(R.id.homeImageButton);
+        homeImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonMethods.simpleMoveToAnotherActivity(ActivityHomeVideoWatchPembelajaran.this, ActivityHome.class, true);
+            }
+        });
 
         userDataHashMap = (HashMap<String, String>) getIntent().getSerializableExtra("userDataHashMap");
 
@@ -75,17 +89,37 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
             @Override
             public void onCallback(HashMap<String, String> hashMap) {
                 urlVideo = hashMap.get("URL");
+                deskripsiVideo = hashMap.get("DESKRIPSI");
+                judulVideo = hashMap.get("JUDUL");
+                deskripsiKontenTextView = (TextView) findViewById(R.id.deskripsiKontenTextView);
+                deskripsiKontenTextView.setText(deskripsiVideo);
                 Log.d("hashMap", urlVideo);
 
-                testPlayVideo(urlVideo);
+                playVideo(urlVideo);
+            }
+        });
+
+        setToolbar();
+    }
+
+    private void setToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbarWatchVideo);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(judulVideo);
+        toolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CommonMethods.simpleMoveToAnotherActivity(ActivityHomeVideoWatchPembelajaran.this, ActivityHomeVideoPembelajaran.class, true);
             }
         });
     }
 
-    private void testPlayVideo(String inputString){
+    private void playVideo(String inputURL){
         SimpleExoPlayerView exoPlayerView;
         SimpleExoPlayer exoPlayer;
-        String videoURL = inputString;
+        String videoURL = inputURL;
 
         exoPlayerView = (SimpleExoPlayerView) findViewById(R.id.exoplayer);
         try {
@@ -100,7 +134,7 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
             exoPlayer.prepare(mediaSource);
             exoPlayer.setPlayWhenReady(true);
         }catch (Exception e){
-            Log.e("MainAcvtivity"," exoplayer error "+ e.toString());
+            Log.e("ActivityWatchVideo", e.toString());
         }
     }
 }
