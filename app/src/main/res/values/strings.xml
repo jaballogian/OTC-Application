@@ -46,6 +46,8 @@
     <string name="deskripsi">Deskripsi</string>
     <string name="pertanyaan">Pertanyaan</string>
     <string name="tulis_pertanyaan">Tulis pertanyaan</string>
+    <string name="hallo_maaf_sekali">Hallo! Maaf sekali!</string>
+    <string name="fitur_ini_masih_dalam_proses_pengembangan">Fitur ini masih dalam\nproses pengembangan</string>
 
     <string name="video_pembelajaran">Video Pembelajaran</string>
     <string name="provinsi">Provinsi</string>
