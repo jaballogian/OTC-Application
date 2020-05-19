@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.otc.application.R;
+import com.otc.application.others.CommonMethods;
 
 public class ActivityWelcomeScreen extends AppCompatActivity {
 
@@ -24,15 +25,8 @@ public class ActivityWelcomeScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                moveToMainAcitivty();
+                CommonMethods.simpleMoveToAnotherActivity(ActivityWelcomeScreen.this, ActivityHome.class, true);
             }
         },SPLASH_TIMED_OUT);
-    }
-
-    private void moveToMainAcitivty(){
-        Intent toActivityMain = new Intent(ActivityWelcomeScreen.this, ActivityHome.class);
-        toActivityMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(toActivityMain);
-        finish();
     }
 }

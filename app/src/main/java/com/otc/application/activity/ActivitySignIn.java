@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,14 +68,9 @@ public class ActivitySignIn extends AppCompatActivity {
         textViewBelumPunyaAkun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveToActivitySignUp();
+                CommonMethods.simpleMoveToAnotherActivity(ActivitySignIn.this, ActivitySignUp.class, false);
             }
         });
-    }
-
-    private void moveToActivitySignUp(){
-        Intent intent = new Intent(ActivitySignIn.this, ActivitySignUp.class);
-        startActivity(intent);
     }
 
     private void handleWhenButtonMasukIsClicked(){
@@ -98,7 +94,7 @@ public class ActivitySignIn extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     loading.dismiss();
-                    moveToActivityHome();
+                    CommonMethods.simpleMoveToAnotherActivity(ActivitySignIn.this, ActivityHome.class, true);
                 }
                 else{
                     loading.hide();
@@ -106,12 +102,5 @@ public class ActivitySignIn extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void moveToActivityHome(){
-        Intent toActivityHome = new Intent(ActivitySignIn.this, ActivityHome.class);
-        toActivityHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(toActivityHome);
-        finish();
     }
 }

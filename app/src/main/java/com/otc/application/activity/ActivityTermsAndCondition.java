@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.widget.Toolbar;
 
 import com.otc.application.R;
+import com.otc.application.others.CommonMethods;
 
 public class ActivityTermsAndCondition extends AppCompatActivity {
 
@@ -26,15 +27,8 @@ public class ActivityTermsAndCondition extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                moveToActivitySignUp();
+                CommonMethods.simpleMoveToAnotherActivity(ActivityTermsAndCondition.this, ActivitySignUp.class, true);
             }
         });
-    }
-
-    private void moveToActivitySignUp(){
-        Intent intent = new Intent(ActivityTermsAndCondition.this, ActivitySignUp.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
     }
 }

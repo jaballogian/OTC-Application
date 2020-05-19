@@ -80,7 +80,7 @@ public class ActivitySignUp extends AppCompatActivity {
         textViewSudahPunyaAkunMasukAja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveToActivitySignIn();
+                CommonMethods.simpleMoveToAnotherActivity(ActivitySignUp.this, ActivitySignIn.class, false);
             }
         });
 
@@ -90,7 +90,7 @@ public class ActivitySignUp extends AppCompatActivity {
         textViewPersetujuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveToActivityTermsAndCondition();
+                CommonMethods.simpleMoveToAnotherActivity(ActivitySignUp.this, ActivityTermsAndCondition.class, false);
             }
         });
 
@@ -144,11 +144,6 @@ public class ActivitySignUp extends AppCompatActivity {
         });
     }
 
-    private void moveToActivityTermsAndCondition(){
-        Intent intent = new Intent(ActivitySignUp.this, ActivityTermsAndCondition.class);
-        startActivity(intent);
-    }
-
     private void handleWhenButtonMasukIsClicked(){
 
         if(checkBoxPersetujuanPendaftaran.isChecked()){
@@ -185,19 +180,6 @@ public class ActivitySignUp extends AppCompatActivity {
         }
     }
 
-    private void moveToActivityHome(){
-        Intent toActivityHome = new Intent(ActivitySignUp.this, ActivityHome.class);
-        toActivityHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(toActivityHome);
-        finish();
-    }
-
-    private void moveToActivitySignIn(){
-        Intent toActivitySignIn = new Intent(ActivitySignUp.this, ActivitySignIn.class);
-        startActivity(toActivitySignIn);
-        finish();
-    }
-
     private void registerUser(final HashMap<String, String> inputHashMap){
         mAuth.createUserWithEmailAndPassword(inputHashMap.get(getString(R.string.email)), EncryptionAndDecryption.encrypt(inputHashMap.get(getString(R.string.kata_sandi))))
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -225,7 +207,7 @@ public class ActivitySignUp extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
 
                 if(task.isSuccessful()){
-                    moveToActivityHome();
+                    CommonMethods.simpleMoveToAnotherActivity(ActivitySignUp.this, ActivityHome.class, true);
                     Toast.makeText(ActivitySignUp.this, getString(R.string.selamat_datang), Toast.LENGTH_LONG).show();
                 }
             }

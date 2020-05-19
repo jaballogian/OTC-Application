@@ -3,6 +3,7 @@ package com.otc.application.others;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -203,5 +204,14 @@ public class CommonMethods {
         inputProgressDialog.setMessage(context.getString(R.string.mohon_tunggu));
         inputProgressDialog.setCanceledOnTouchOutside(false);
         inputProgressDialog.show();
+    }
+
+    public static void simpleMoveToAnotherActivity(Context sourceActivity, Class destinationActivity, boolean inputFlagState){
+        Intent intent = new Intent(sourceActivity, destinationActivity);
+        if(inputFlagState){
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
+        sourceActivity.startActivity(intent);
+        ((Activity) sourceActivity).finish();
     }
 }
