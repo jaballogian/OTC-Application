@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.otc.application.encryptionanddecryption.EncryptionAndDecryption;
 import com.otc.application.others.CommonMethods;
 import com.otc.application.R;
+import com.otc.application.others.ReadDataFromFirebase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class ActivitySignUp extends AppCompatActivity {
 
     private TextView textViewSudahPunyaAkunMasukAja, textViewPersetujuan;
     private CommonMethods commonMethods;
+    private ReadDataFromFirebase readDataFromFirebase;
     private DatabaseReference halamanPendaftaranReference, jenisAkunReference, jenjangSekolahReference, tipeSekolahReference;
     private AppCompatSpinner spinnerJenisAkun, spinnerJenjangSekolah, spinnerTipeSekolah;
     private Button buttonMasuk;
@@ -59,6 +61,7 @@ public class ActivitySignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         commonMethods = new CommonMethods(this);
+        readDataFromFirebase = new ReadDataFromFirebase(this);
 
         loading = new ProgressDialog(this);
 
@@ -97,13 +100,13 @@ public class ActivitySignUp extends AppCompatActivity {
         userData = new HashMap<>();
 
         spinnerJenisAkun = (AppCompatSpinner) findViewById(R.id.spinnerJenisAkun);
-        commonMethods.readKeyArrayListFromDatabase(jenisAkunReference, spinnerJenisAkun);
+        readDataFromFirebase.readKeyArrayListFromDatabase(jenisAkunReference, spinnerJenisAkun);
 
         spinnerJenjangSekolah = (AppCompatSpinner) findViewById(R.id.spinnerJenjangSekolah);
-        commonMethods.readKeyArrayListFromDatabase(jenjangSekolahReference, spinnerJenjangSekolah);
+        readDataFromFirebase.readKeyArrayListFromDatabase(jenjangSekolahReference, spinnerJenjangSekolah);
 
         spinnerTipeSekolah = (AppCompatSpinner) findViewById(R.id.spinnerTipeSekolah);
-        commonMethods.readKeyArrayListFromDatabase(tipeSekolahReference, spinnerTipeSekolah);
+        readDataFromFirebase.readKeyArrayListFromDatabase(tipeSekolahReference, spinnerTipeSekolah);
 
         spinnerBidang = (AppCompatSpinner) findViewById(R.id.spinnerBidang);
 
@@ -113,7 +116,7 @@ public class ActivitySignUp extends AppCompatActivity {
         arrayListSpinner.add(spinnerTipeSekolah);
         arrayListSpinner.add(spinnerBidang);
 
-        userDataFromSpinner = commonMethods.handleSpinnderOnItemClicked(arrayListSpinner);
+        userDataFromSpinner = readDataFromFirebase.handleSpinnderOnItemClicked(arrayListSpinner);
 
         textInputEditTextNamaLengkap = (TextInputEditText) findViewById(R.id.textInputEditTextNamaLengkap);
         textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
@@ -147,7 +150,7 @@ public class ActivitySignUp extends AppCompatActivity {
     private void handleWhenButtonMasukIsClicked(){
 
         if(checkBoxPersetujuanPendaftaran.isChecked()){
-            userDataFromEditText = commonMethods.getAllEditTextValueAndConvertItToHashMap(userDataHashMapEditText);
+            userDataFromEditText = readDataFromFirebase.getAllEditTextValueAndConvertItToHashMap(userDataHashMapEditText);
 
             if(userDataFromEditText.get(getString(R.string.nama_lengkap_beserta_gelar)).isEmpty()
                     || userDataFromEditText.get(getString(R.string.email)).isEmpty()

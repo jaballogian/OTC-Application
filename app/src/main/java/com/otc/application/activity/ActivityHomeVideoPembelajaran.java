@@ -16,16 +16,19 @@ import com.otc.application.adapter.ListVideoPembelajaranAdapter;
 import com.otc.application.item.ItemProgram;
 import com.otc.application.item.ItemVideoPembelajaran;
 import com.otc.application.others.CommonMethods;
+import com.otc.application.others.ReadDataFromFirebase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.locks.ReadWriteLock;
 
 public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
 
     private DatabaseReference videoPembelajaranReference;
     private HashMap<String, String> userDataHashMap;
     private ArrayList<String> babArrayList;
-    private CommonMethods commonMethods;
+//    private CommonMethods commonMethods;
+    private ReadDataFromFirebase readDataFromFirebase;
     private RecyclerView babRecylerView;
     private ArrayList<ItemVideoPembelajaran> videoPembelajaranArrayList;
     private String urlVideoPembelajaran, keyDatabaseReference, subbabDatabaseReference, materiDatabaseReference;
@@ -35,7 +38,8 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_video_pembelajaran);
 
-        commonMethods = new CommonMethods(this);
+//        commonMethods = new CommonMethods(this);
+        readDataFromFirebase =new ReadDataFromFirebase(this);
 
         userDataHashMap = (HashMap<String, String>) getIntent().getSerializableExtra("userDataHashMap");
         keyDatabaseReference = getIntent().getExtras().getString("keyDatabaseReference");
@@ -67,7 +71,7 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
         }
 
         babArrayList = new ArrayList<String>();
-        commonMethods.readKeyArrayListFromDatabase(videoPembelajaranReference, new CommonMethods.FirebaseCallbackArrayList() {
+        readDataFromFirebase.readKeyArrayListFromDatabase(videoPembelajaranReference, new ReadDataFromFirebase.FirebaseCallbackArrayList() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
                 babArrayList = arrayList;

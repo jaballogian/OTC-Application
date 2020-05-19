@@ -22,6 +22,7 @@ import com.otc.application.activity.ActivitySignIn;
 import com.otc.application.adapter.GridProgramAdapter;
 import com.otc.application.item.ItemProgram;
 import com.otc.application.others.CommonMethods;
+import com.otc.application.others.ReadDataFromFirebase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class BerandaFragment extends Fragment {
     private ArrayList<ItemProgram> programArrayList;
     private ArrayList<String> namaProgramArrayList;
     private CommonMethods commonMethods;
+    private ReadDataFromFirebase readDataFromFirebase;
     private RecyclerView programRecylerView;
     private TextView namaPenggunaTextView, namaSekolahTextView, jenisAkunTextView;
     private HashMap<String, String> userDataHashMap;
@@ -45,6 +47,7 @@ public class BerandaFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_beranda, container, false);
 
         commonMethods = new CommonMethods(getContext());
+        readDataFromFirebase = new ReadDataFromFirebase(getContext());
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null){
             moveToActivitySignIn();
@@ -57,7 +60,7 @@ public class BerandaFragment extends Fragment {
             databaseReference = FirebaseDatabase.getInstance().getReference();
             namaProgramReference = databaseReference.child("Halaman").child("Home").child("Program");
 
-            commonMethods.readKeyArrayListFromDatabase(namaProgramReference, new CommonMethods.FirebaseCallbackArrayList() {
+            readDataFromFirebase.readKeyArrayListFromDatabase(namaProgramReference, new ReadDataFromFirebase.FirebaseCallbackArrayList() {
                 @Override
                 public void onCallback(ArrayList<String> arrayList) {
 
@@ -79,7 +82,7 @@ public class BerandaFragment extends Fragment {
             profilPenggunaReference = databaseReference.child("Sementara").child("Pengguna").child(uID).child("Profil");
 
             userDataHashMap = new HashMap<String, String>();
-            commonMethods.readValueArrayListFromDatabase(profilPenggunaReference, new CommonMethods.FirebaseCallbackHashMap() {
+            readDataFromFirebase.readValueArrayListFromDatabase(profilPenggunaReference, new ReadDataFromFirebase.FirebaseCallbackHashMap() {
                 @Override
                 public void onCallback(HashMap<String, String> hashMap) {
                     userDataHashMap = hashMap;

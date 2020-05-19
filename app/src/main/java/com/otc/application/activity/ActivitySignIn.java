@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.otc.application.encryptionanddecryption.EncryptionAndDecryption;
 import com.otc.application.others.CommonMethods;
 import com.otc.application.R;
+import com.otc.application.others.ReadDataFromFirebase;
 
 import java.util.HashMap;
 
@@ -28,6 +29,7 @@ public class ActivitySignIn extends AppCompatActivity {
 
     private TextView textViewBelumPunyaAkun;
     private CommonMethods commonMethods;
+    private ReadDataFromFirebase readDataFromFirebase;
     private AppCompatEditText textInputEditTextAlamatEmail, textInputEditTextKataSandi;
     private HashMap<String, EditText> userDataHashMapEditText;
     private Button masukButton;
@@ -41,6 +43,7 @@ public class ActivitySignIn extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         commonMethods = new CommonMethods(this);
+        readDataFromFirebase = new ReadDataFromFirebase(this);
 
         loading = new ProgressDialog(this);
 
@@ -75,7 +78,7 @@ public class ActivitySignIn extends AppCompatActivity {
 
     private void handleWhenButtonMasukIsClicked(){
         userDataFromEditText = new HashMap<String, String>();
-        userDataFromEditText = commonMethods.getAllEditTextValueAndConvertItToHashMap(userDataHashMapEditText);
+        userDataFromEditText = readDataFromFirebase.getAllEditTextValueAndConvertItToHashMap(userDataHashMapEditText);
 
         if(userDataFromEditText.get(getString(R.string.email)).isEmpty() || userDataFromEditText.get(getString(R.string.kata_sandi)).isEmpty()){
             Toast.makeText(ActivitySignIn.this, getString(R.string.semua_kolom_yang_bukan_opsional_wajib_diisi), Toast.LENGTH_LONG).show();

@@ -27,6 +27,7 @@ import com.otc.application.R;
 import com.otc.application.item.ItemVideoPembelajaran;
 import com.otc.application.others.CommonMethods;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.otc.application.others.ReadDataFromFirebase;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -40,6 +41,7 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
     private String subbabDatabaseReference, materiDatabaseReference, videoDatabaseReference, urlVideo;
     private HashMap<String, String> userDataHashMap;
     private CommonMethods commonMethods;
+    private ReadDataFromFirebase readDataFromFirebase;
     private VideoView videoView;
 
     @Override
@@ -49,6 +51,8 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
 
         commonMethods = new CommonMethods(this);
         commonMethods.blockScreenCapture(this);
+
+        readDataFromFirebase = new ReadDataFromFirebase(this);
 
         userDataHashMap = (HashMap<String, String>) getIntent().getSerializableExtra("userDataHashMap");
 
@@ -67,7 +71,7 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
 
         Log.d("videoReference", videoReference.toString());
 
-        commonMethods.readValueArrayListFromDatabase(videoReference, new CommonMethods.FirebaseCallbackHashMap() {
+        readDataFromFirebase.readValueArrayListFromDatabase(videoReference, new ReadDataFromFirebase.FirebaseCallbackHashMap() {
             @Override
             public void onCallback(HashMap<String, String> hashMap) {
                 urlVideo = hashMap.get("URL");
