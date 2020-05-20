@@ -14,7 +14,9 @@
         <activity
             android:name=".activity.ActivityHome"
             android:label="@string/title_activity_home"/>
-        <activity android:name=".activity.ActivityHomeVideoWatchPembelajaran" />
+        <activity android:name=".activity.ActivityHomeVideoWatchPembelajaran"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.ActivityTermsAndCondition" />
         <activity android:name=".activity.ActivityHomeVideoPembelajaran" />
         <activity android:name=".activity.ActivitySignUp" />

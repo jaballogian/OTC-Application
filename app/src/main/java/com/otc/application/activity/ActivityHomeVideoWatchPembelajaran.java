@@ -1,17 +1,18 @@
 package com.otc.application.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
-import android.media.Image;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
@@ -27,17 +28,12 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.internal.Util;
 import com.otc.application.R;
-import com.otc.application.item.ItemVideoPembelajaran;
 import com.otc.application.others.CommonMethods;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.otc.application.others.ReadDataFromFirebase;
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.HashMap;
 
-import javax.sql.DataSource;
+import java.util.HashMap;
 
 public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
 
@@ -49,6 +45,10 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageButton homeImageButton;
     private TextView deskripsiKontenTextView;
+    private ImageView fullscreenButton;
+    private SimpleExoPlayerView exoPlayerView;
+    private SimpleExoPlayer exoPlayer;
+    private boolean fullscreen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +96,7 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
                 Log.d("hashMap", hashMap.toString());
 
                 playVideo(urlVideo);
+                setFullScreenButton();
                 setToolbar(judulVideo);
             }
         });
@@ -116,8 +117,6 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
     }
 
     private void playVideo(String inputURL){
-        SimpleExoPlayerView exoPlayerView;
-        SimpleExoPlayer exoPlayer;
         String videoURL = inputURL;
 
         exoPlayerView = (SimpleExoPlayerView) findViewById(R.id.exoplayer);
@@ -135,5 +134,54 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
         }catch (Exception e){
             Log.e("ActivityWatchVideo", e.toString());
         }
+    }
+
+    private void setFullScreenButton(){
+
+        fullscreenButton = exoPlayerView.findViewById(R.id.exo_fullscreen_icon);
+        fullscreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(fullscreen) {
+                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(ActivityHomeVideoWatchPembelajaran.this, R.drawable.ic_fullscreen_open_white_24dp));
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                    if(getSupportActionBar() != null){
+                        getSupportActionBar().show();
+                    }
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) exoPlayerView.getLayoutParams();
+                    params.width = params.MATCH_PARENT;
+                    params.height = (int) ( 200 * getApplicationContext().getResources().getDisplayMetrics().density);
+                    exoPlayerView.setLayoutParams(params);
+                    fullscreen = false;
+                }else{
+                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(ActivityHomeVideoWatchPembelajaran.this, R.drawable.ic_fullscreen_exit_white_24dp));
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                            |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                    if(getSupportActionBar() != null){
+                        getSupportActionBar().hide();
+                    }
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) exoPlayerView.getLayoutParams();
+                    params.width = params.MATCH_PARENT;
+                    params.height = params.MATCH_PARENT;
+                    exoPlayerView.setLayoutParams(params);
+                    fullscreen = true;
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        exoPlayer.setPlayWhenReady(false);
+    }
+
+    @Override
+    public void onDestroy() {
+        exoPlayer.release();
+        super.onDestroy();
     }
 }
