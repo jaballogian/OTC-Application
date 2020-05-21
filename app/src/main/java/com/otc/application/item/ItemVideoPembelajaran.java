@@ -15,6 +15,16 @@ public class ItemVideoPembelajaran implements Parcelable {
 
     private String subBabVideo;
 
+    public String getShowSubBabVideo() {
+        return showSubBabVideo;
+    }
+
+    public void setShowSubBabVideo(String showSubBabVideo) {
+        this.showSubBabVideo = showSubBabVideo;
+    }
+
+    private String showSubBabVideo;
+
     @Override
     public int describeContents() {
         return 0;
@@ -23,6 +33,7 @@ public class ItemVideoPembelajaran implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.subBabVideo);
+        dest.writeString(this.showSubBabVideo);
     }
 
     public ItemVideoPembelajaran(){
@@ -31,6 +42,7 @@ public class ItemVideoPembelajaran implements Parcelable {
 
     private ItemVideoPembelajaran(Parcel in){
         this.subBabVideo = in.readString();
+        this.showSubBabVideo = in.readString();
     }
 
     public static final Parcelable.Creator<ItemVideoPembelajaran> CREATOR = new Parcelable.Creator<ItemVideoPembelajaran>() {

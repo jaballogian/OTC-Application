@@ -39,7 +39,7 @@ public class ListVideoPembelajaranAdapter extends RecyclerView.Adapter<ListVideo
     @Override
     public void onBindViewHolder(@NonNull final ListVideoPembelajaranAdapter.ListViewHolder holder, int position) {
         ItemVideoPembelajaran itemProgram = listVideoPembelajaran.get(position);
-        holder.subBabTextView.setText(itemProgram.getSubBabVideo());
+        holder.subBabTextView.setText(itemProgram.getShowSubBabVideo());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
