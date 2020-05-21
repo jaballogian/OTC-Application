@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class BerandaFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private String uID;
+    private ImageButton signOutButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -93,6 +95,18 @@ public class BerandaFragment extends Fragment {
                 }
             });
         }
+
+        signOutButton = (ImageButton) root.findViewById(R.id.signOutButton);
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent toActivityLogin = new Intent(getContext(), ActivitySignIn.class);
+                toActivityLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(toActivityLogin);
+                getActivity().finish();
+            }
+        });
 
         return root;
     }
