@@ -26,7 +26,6 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
 
     private DatabaseReference videoPembelajaranReference;
     private HashMap<String, String> userDataHashMap;
-//    private ArrayList<String> babArrayList;
     private ReadDataFromFirebase readDataFromFirebase;
     private RecyclerView babRecylerView;
     private ArrayList<ItemVideoPembelajaran> videoPembelajaranArrayList;
@@ -68,71 +67,76 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
                     .child(getString(R.string.provinsi).toUpperCase());
         }
 
-//        babArrayList = new ArrayList<String>();
         readDataFromFirebase.readKeyArrayListFromDatabase(videoPembelajaranReference, new ReadDataFromFirebase.FirebaseCallbackArrayList() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
-//                babArrayList = arrayList;
 
-                ArrayList<HashMap> videoArrayList = new ArrayList<HashMap>();
-
-                for(int i = 0; i < arrayList.size(); i++){
-                    String element = arrayList.get(i);
-                    char firstCharacter = element.charAt(0);
-                    int indexOfSpace = element.indexOf(" ");
-                    String number = "";
-                    String title = "";
-
-                    if(Character.isDigit(firstCharacter)){
-                        number = element.substring(0, indexOfSpace);
-                        title = element.substring(indexOfSpace);
-
-                        if(number.contains("_")){
-                            int indexOfUnderScore = number.indexOf("_");
-                            number = number.substring(indexOfUnderScore + 1);
-                        }
-
-                        HashMap<String, String> videoHashMap = new HashMap<String, String>();
-                        videoHashMap.put("number", number);
-                        videoHashMap.put("title", number + "." + title);
-                        videoHashMap.put("original", element);
-                        videoArrayList.add(videoHashMap);
-                    }
-                    else {
-                        HashMap<String, String> videoHashMap = new HashMap<String, String>();
-                        videoHashMap.put("title", element);
-                        videoHashMap.put("original", element);
-                        videoArrayList.add(videoHashMap);
-                    }
-
-
-                }
-
-                for(int i = 0; i < videoArrayList.size(); i++){
-                    for(int j = 0; j < videoArrayList.size(); j++){
-                        try{
-                            int firstNumber = Integer.valueOf((String) videoArrayList.get(i).get("number"));
-                            int secondNumber = Integer.valueOf((String) videoArrayList.get(j).get("number"));
-                            if(firstNumber < secondNumber){
-                                HashMap<String, String> temp = new HashMap<String, String>();
-                                temp = videoArrayList.get(i);
-                                videoArrayList.set(i, videoArrayList.get(j));
-                                videoArrayList.set(j, temp);
-                            }
-                        }
-                        catch (NumberFormatException error){
-                            Log.d("NumberFormatException", error.getMessage());
-                        }
-                    }
-                }
+                ArrayList<HashMap> videoArrayListHashMap = getNumberAndTitleFromArrayList(arrayList);
+                videoArrayListHashMap = sortArrayListHashMapByNumberKey(videoArrayListHashMap);
 
                 babRecylerView =(RecyclerView) findViewById(R.id.videoRecylerView);
 
                 videoPembelajaranArrayList = new ArrayList<ItemVideoPembelajaran>();
-                assignArrayListStringToArrayListProgram(videoArrayList, videoPembelajaranArrayList);
+                assignArrayListStringToArrayListProgram(videoArrayListHashMap, videoPembelajaranArrayList);
                 setValueToRecylerView();
             }
         });
+    }
+
+    private ArrayList<HashMap> getNumberAndTitleFromArrayList(ArrayList<String> inputArrayList){
+        ArrayList<HashMap> videoArrayList = new ArrayList<HashMap>();
+
+        for(int i = 0; i < inputArrayList.size(); i++){
+            String element = inputArrayList.get(i);
+            char firstCharacter = element.charAt(0);
+            int indexOfSpace = element.indexOf(" ");
+            String number = "";
+            String title = "";
+
+            if(Character.isDigit(firstCharacter)){
+                number = element.substring(0, indexOfSpace);
+                title = element.substring(indexOfSpace);
+
+                if(number.contains("_")){
+                    int indexOfUnderScore = number.indexOf("_");
+                    number = number.substring(indexOfUnderScore + 1);
+                }
+
+                HashMap<String, String> videoHashMap = new HashMap<String, String>();
+                videoHashMap.put("number", number);
+                videoHashMap.put("title", number + "." + title);
+                videoHashMap.put("original", element);
+                videoArrayList.add(videoHashMap);
+            }
+            else {
+                HashMap<String, String> videoHashMap = new HashMap<String, String>();
+                videoHashMap.put("title", element);
+                videoHashMap.put("original", element);
+                videoArrayList.add(videoHashMap);
+            }
+        }
+        return videoArrayList;
+    }
+
+    private ArrayList<HashMap> sortArrayListHashMapByNumberKey(ArrayList<HashMap> inputArrayListHashMap){
+        for(int i = 0; i < inputArrayListHashMap.size(); i++){
+            for(int j = 0; j < inputArrayListHashMap.size(); j++){
+                try{
+                    int firstNumber = Integer.valueOf((String) inputArrayListHashMap.get(i).get("number"));
+                    int secondNumber = Integer.valueOf((String) inputArrayListHashMap.get(j).get("number"));
+                    if(firstNumber < secondNumber){
+                        HashMap<String, String> temp = new HashMap<String, String>();
+                        temp = inputArrayListHashMap.get(i);
+                        inputArrayListHashMap.set(i, inputArrayListHashMap.get(j));
+                        inputArrayListHashMap.set(j, temp);
+                    }
+                }
+                catch (NumberFormatException error){
+                    Log.d("NumberFormatException", error.getMessage());
+                }
+            }
+        }
+        return inputArrayListHashMap;
     }
 
     private void assignArrayListStringToArrayListProgram(ArrayList<HashMap> inputSubBabArrayList, ArrayList<ItemVideoPembelajaran> inputItemProgramArrayList){
