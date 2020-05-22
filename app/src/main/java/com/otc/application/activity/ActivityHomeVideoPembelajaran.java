@@ -101,7 +101,6 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
                     int indexOfUnderScore = number.indexOf("_");
                     number = number.substring(indexOfUnderScore + 1);
                 }
-
                 HashMap<String, String> videoHashMap = new HashMap<String, String>();
                 videoHashMap.put("number", number);
                 videoHashMap.put("title", number + "." + title);
@@ -109,8 +108,11 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
                 videoArrayList.add(videoHashMap);
             }
             else {
+                title = element.substring(0, indexOfSpace);
+                number = element.substring(indexOfSpace + 1);
                 HashMap<String, String> videoHashMap = new HashMap<String, String>();
-                videoHashMap.put("title", element);
+                videoHashMap.put("number", number);
+                videoHashMap.put("title", number + "." + title + " " + number);
                 videoHashMap.put("original", element);
                 videoArrayList.add(videoHashMap);
             }
@@ -191,6 +193,29 @@ public class ActivityHomeVideoPembelajaran extends AppCompatActivity {
             intent1.putExtra("materiDatabaseReference", materiDatabaseReference);
             intent1.putExtra("videoDatabaseReference", itemVideoPembelajaran.getSubBabVideo());
             Log.d("keyDatabaseReference", keyDatabaseReference);
+            startActivity(intent1);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(keyDatabaseReference.equals("bab")){
+            Intent intent = new Intent(ActivityHomeVideoPembelajaran.this, ActivityHome.class);
+            startActivity(intent);
+        }
+        else if(keyDatabaseReference.equals("subbab")){
+            Intent intent = new Intent(ActivityHomeVideoPembelajaran.this, ActivityHomeVideoPembelajaran.class);
+            intent.putExtra("userDataHashMap", userDataHashMap);
+            keyDatabaseReference = "bab";
+            intent.putExtra("keyDatabaseReference", keyDatabaseReference);
+            startActivity(intent);
+        }
+        else if(keyDatabaseReference.equals("materi")){
+            Intent intent1 = new Intent(ActivityHomeVideoPembelajaran.this, ActivityHomeVideoWatchPembelajaran.class);
+            keyDatabaseReference = "subbab";
+            intent1.putExtra("userDataHashMap", userDataHashMap);
+            intent1.putExtra("keyDatabaseReference", keyDatabaseReference);
             startActivity(intent1);
         }
     }

@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
@@ -183,5 +184,16 @@ public class ActivityHomeVideoWatchPembelajaran extends AppCompatActivity {
     public void onDestroy() {
         exoPlayer.release();
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent moveToActivityHomeVideoPembelajaran = new Intent(ActivityHomeVideoWatchPembelajaran.this, ActivityHomeVideoPembelajaran.class);
+        moveToActivityHomeVideoPembelajaran.putExtra("keyDatabaseReference", "materi");
+        moveToActivityHomeVideoPembelajaran.putExtra("subbabDatabaseReference", subbabDatabaseReference);
+        moveToActivityHomeVideoPembelajaran.putExtra("materiDatabaseReference", materiDatabaseReference);
+        moveToActivityHomeVideoPembelajaran.putExtra("videoDatabaseReference", videoDatabaseReference);
+        startActivity(moveToActivityHomeVideoPembelajaran);
     }
 }

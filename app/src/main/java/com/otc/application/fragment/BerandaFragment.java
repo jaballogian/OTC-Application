@@ -101,10 +101,7 @@ public class BerandaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent toActivityLogin = new Intent(getContext(), ActivitySignIn.class);
-                toActivityLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(toActivityLogin);
-                getActivity().finish();
+                commonMethods.simpleMoveToAnotherActivity(getContext(), ActivitySignIn.class, true);
             }
         });
 
